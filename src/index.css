@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/* === Color System Variables === */
+:root {
+  /* Brand Colors */
+  --color-primary: #3A8DDF;
+  --color-primary-light: #7EC6F6;
+  --color-secondary: #444444;
+  --color-accent: #FFFFFF;
+  --color-background: #F5FAFD;
+  --color-text-main: #222222;
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--color-text-main);
+  background-color: var(--color-background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Utility Classes (for non-Tailwind usage) === */
+.bg-primary { background-color: var(--color-primary) ; }
+.bg-primary-light { background-color: var(--color-primary-light) ; }
+.bg-accent { background-color: var(--color-accent) ; }
+.bg-background { background-color: var(--color-background) ; }
+
+.text-primary { color: var(--color-primary) ; }
+.text-secondary { color: var(--color-secondary); }
+.text-accent { color: var(--color-accent) ; }
+.text-main { color: var(--color-text-main) ; }
+
+/* === Base Styles === */
+a {
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--color-primary-light);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--color-text-main);
+  background-color: var(--color-background);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-secondary);
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--color-primary);
+  color: var(--color-accent);
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+button:hover {
+  border-color: var(--color-primary-light);
+  background-color: var(--color-primary-light);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Secondary Button Example */
+.button-secondary {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+.button-secondary:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-accent);
+}
+
+/* Light mode override */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: var(--color-text-main);
+    background-color: var(--color-background);
+  }
+  a:hover {
+    color: var(--color-primary-light);
+  }
+  button {
+    background-color: var(--color-primary);
+    color: var(--color-accent);
+  }
+}

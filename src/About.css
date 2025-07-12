@@ -1,0 +1,19 @@
+@keyframes float {
+  0% { transform: translateY(0px);}
+  50% { transform: translateY(-18px);}
+  100% { transform: translateY(0px);}
+}
+@keyframes float-rev {
+  0% { transform: translateY(0px);}
+  50% { transform: translateY(18px);}
+  100% { transform: translateY(0px);}
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+.animate-float-slow {
+  animation: float 7s ease-in-out infinite;
+}
+.animate-float-rev {
+  animation: float-rev 5s ease-in-out infinite;
+}
