@@ -10,6 +10,7 @@ const navLinks = [
   { name: "Blog", href: "/blog" },
   // { name: "Categories", href: "/categories" },
   { name: "List Your Products", href: "/list-your-products" },
+  { name: "Marketplace", href: "/marketplace" },
 ];
 
 export default function Navbar() {

@@ -9,6 +9,7 @@ import About from './About.jsx';
 import Blog from './Blog';
 // import Categories from './Categories';
 import ListProducts from './ListProducts';
+import Marketplace from './components/Marketplace.jsx';
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         {/* <Route path="/categories" element={<Categories />} /> */}
         <Route path="/list-your-products" element={<ListProducts />} />
+        <Route path="/marketplace" element={<Marketplace />} />
+        {/* Add more routes as needed */}
       </Routes>
       <Footer />
     </Router>
