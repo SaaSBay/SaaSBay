@@ -1,63 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaSearch, FaUserCircle, FaCalendarAlt, FaTag, FaArrowRight, FaEnvelope, FaFire } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./Blog.css";
-
-// Dummy data for demonstration
-const categories = ["All", "Productivity", "Finance", "Engineering", "Vendor Tips"];
-const featuredArticle = {
-  image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
-  title: "The Future of SaaS: Trends Every Buyer Should Know",
-  excerpt: "Explore the latest SaaS trends and how they impact your business decisions in 2025 and beyond.",
-  author: "Ayesha Khan",
-  avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-  date: "July 4, 2025",
-};
-const articles = [
-  {
-    image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
-    category: "Productivity",
-    title: "10 SaaS Tools to Boost Your Team’s Efficiency",
-    excerpt: "Discover top SaaS apps that help teams collaborate and get more done.",
-    author: "Rahul Mehta",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-    date: "July 2, 2025",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80",
-    category: "Finance",
-    title: "How to Choose the Right Accounting SaaS",
-    excerpt: "A step-by-step guide for businesses comparing finance software.",
-    author: "Priya Sharma",
-    avatar: "https://randomuser.me/api/portraits/women/65.jpg",
-    date: "June 28, 2025",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
-    category: "Engineering",
-    title: "DevOps in the Cloud: Best SaaS Platforms",
-    excerpt: "What to look for in engineering SaaS and how to evaluate your options.",
-    author: "Alex Chen",
-    avatar: "https://randomuser.me/api/portraits/men/43.jpg",
-    date: "June 25, 2025",
-  },
-  // Add more articles as needed
-];
-
-const trending = [
-  {
-    title: "Why SaaS Security Matters in 2025",
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=100&q=80",
-  },
-  {
-    title: "Top 5 SaaS for Remote Teams",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=100&q=80",
-  },
-];
+import blogData from "./assets/blogData.json";
 
 export default function Blog() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Simulate fetch, replace with actual fetch later
+    setData(blogData);
+  }, []);
+
+  if (!data) return <div className="text-center py-20">Loading...</div>;
+
+  const { categories, featuredArticle, articles, trending } = data;
 
   // Filter articles by category and search
   const filteredArticles = articles.filter(
@@ -189,9 +149,12 @@ export default function Blog() {
                     </span>
                   </div>
                   <div className="flex flex-col flex-1 p-5">
-                    <a href="#" className="font-bold text-lg text-primary mb-1 hover:underline transition">
+                    <Link
+                      to={`/blog/${a.title.replace(/\s+/g, "-").toLowerCase()}`}
+                      className="font-bold text-lg text-primary mb-1 hover:underline transition"
+                    >
                       {a.title}
-                    </a>
+                    </Link>
                     <p className="text-secondary text-sm mb-3">{a.excerpt}</p>
                     <div className="flex items-center gap-2 mt-auto">
                       <img src={a.avatar} alt={a.author} className="w-7 h-7 rounded-full" />

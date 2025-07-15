@@ -1,0 +1,113 @@
+{
+  "categories": ["All", "Productivity", "Finance", "Engineering", "Vendor Tips"],
+  "featuredArticle": {
+    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
+    "title": "The Future of SaaS: Trends Every Buyer Should Know",
+    "excerpt": "Explore the latest SaaS trends and how they impact your business decisions in 2025 and beyond.",
+    "author": "Ayesha Khan",
+    "avatar": "https://randomuser.me/api/portraits/women/44.jpg",
+    "date": "July 4, 2025"
+  },
+ "articles": [
+    {
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
+      "category": "Productivity",
+      "title": "10 SaaS Tools to Boost Your Team’s Efficiency",
+      "excerpt": "Discover top SaaS apps that help teams collaborate and get more done.",
+      "author": "Rahul Mehta",
+      "avatar": "https://randomuser.me/api/portraits/men/32.jpg",
+      "date": "July 2, 2025"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80",
+      "category": "Finance",
+      "title": "How to Choose the Right Accounting SaaS",
+      "excerpt": "A step-by-step guide for businesses comparing finance software.",
+      "author": "Priya Sharma",
+      "avatar": "https://randomuser.me/api/portraits/women/65.jpg",
+      "date": "June 28, 2025"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
+      "category": "Engineering",
+      "title": "DevOps in the Cloud: Best SaaS Platforms",
+      "excerpt": "What to look for in engineering SaaS and how to evaluate your options.",
+      "author": "Alex Chen",
+      "avatar": "https://randomuser.me/api/portraits/men/43.jpg",
+      "date": "June 25, 2025"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1532619187600-cf5d1bdccc74?auto=format&fit=crop&w=400&q=80",
+      "category": "Marketing",
+      "title": "Email Marketing SaaS: Tools That Actually Convert",
+      "excerpt": "Explore email platforms that increase open rates and engagement.",
+      "author": "Sara Kim",
+      "avatar": "https://randomuser.me/api/portraits/women/47.jpg",
+      "date": "July 10, 2025"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80",
+      "category": "Tech",
+      "title": "Top 5 AI SaaS Startups to Watch in 2025",
+      "excerpt": "These emerging SaaS companies are leveraging AI in exciting ways.",
+      "author": "David Nguyen",
+      "avatar": "https://randomuser.me/api/portraits/men/77.jpg",
+      "date": "July 5, 2025"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=400&q=80",
+      "category": "Design",
+      "title": "Best UI Design Tools for SaaS Apps",
+      "excerpt": "A roundup of the most user-friendly design tools for SaaS product teams.",
+      "author": "Emily Patel",
+      "avatar": "https://randomuser.me/api/portraits/women/50.jpg",
+      "date": "June 30, 2025"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=400&q=80",
+      "category": "Startups",
+      "title": "Launching Your First SaaS Product: A Founder’s Checklist",
+      "excerpt": "From ideation to launch, here’s what every SaaS founder should know.",
+      "author": "Michael Brooks",
+      "avatar": "https://randomuser.me/api/portraits/men/21.jpg",
+      "date": "July 1, 2025"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80",
+      "category": "Customer Success",
+      "title": "SaaS Customer Retention Strategies That Work",
+      "excerpt": "Learn how to reduce churn and keep your users happy.",
+      "author": "Anika Rao",
+      "avatar": "https://randomuser.me/api/portraits/women/60.jpg",
+      "date": "June 27, 2025"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80",
+      "category": "Data",
+      "title": "Data Privacy in SaaS: What You Need to Know",
+      "excerpt": "A practical look at compliance, regulations, and best practices in 2025.",
+      "author": "Liam Turner",
+      "avatar": "https://randomuser.me/api/portraits/men/55.jpg",
+      "date": "June 23, 2025"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1581090700227-1e8d1a0fdd89?auto=format&fit=crop&w=400&q=80",
+      "category": "Remote Work",
+      "title": "SaaS for Distributed Teams: Tools You Should Be Using",
+      "excerpt": "Remote teams thrive with the right software stack — here’s what works.",
+      "author": "Jenna Morris",
+      "avatar": "https://randomuser.me/api/portraits/women/35.jpg",
+      "date": "July 3, 2025"
+    }
+  ],
+  "trending": [
+    {
+      "title": "Why SaaS Security Matters in 2025",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=100&q=80"
+    },
+    {
+      "title": "Top 5 SaaS for Remote Teams",
+      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=100&q=80"
+    }
+  ]
+}

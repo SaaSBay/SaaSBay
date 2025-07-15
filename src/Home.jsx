@@ -1,11 +1,15 @@
-import React, { useRef, useState } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
+import { motion, useAnimation, useInView, AnimatePresence } from "framer-motion";
 import accountingIcon from "./assets/accounting.png";
 import supportIcon from "./assets/support.png";
 import codingIcon from "./assets/coding.png";
 import networkIcon from "./assets/network.png";
 import salesIcon from "./assets/sales.png";
-import Banner from "./assets/Banner_1.png";
+import Dummy1 from "./assets/Dummy_1.avif";
+import Dummy2 from "./assets/Dummy_2.avif";
+import Dummy3 from "./assets/Dummy_3.avif";
+import Dummy4 from "./assets/Dummy_4.avif";
+import Dummy5 from "./assets/Dummy_5.avif";
 
 const categories = [
 	{
@@ -37,39 +41,28 @@ const categories = [
 
 const cardBanners = [
 	{
-		title: "Accounting & Finance",
-		subtitle:
-			"Automate your books, manage payroll, and gain real-time financial insights.",
-		features: [
-			"Automated invoicing",
-			"Real-time dashboards",
-			"Integrates with 100+ banks",
-		],
-		price: "Starting from ₹499/mo.",
-		cta: "RENT NOW",
 		img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80",
+		href: "https://example.com/appliances",
 	},
 	{
-		title: "Customer Support",
-		subtitle:
-			"Delight your customers with fast, multi-channel support solutions.",
-		features: [
-			"Live chat & ticketing",
-			"AI-powered helpdesk",
-			"Analytics & reporting",
-		],
-		price: "Starting from ₹299/mo.",
-		cta: "RENT NOW",
 		img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
+		href: "https://example.com/compact",
 	},
 	{
-		title: "Development & Engineering",
-		subtitle:
-			"Boost your workflow with top dev tools and seamless integrations.",
-		features: ["Version control", "CI/CD pipelines", "Code collaboration"],
-		price: "Starting from ₹599/mo.",
-		cta: "RENT NOW",
 		img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+		href: "https://example.com/beds",
+	},
+	{
+		img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+		href: "https://example.com/beds",
+	},
+	{
+		img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+		href: "https://example.com/beds",
+	},
+	{
+		img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+		href: "https://example.com/beds",
 	},
 ];
 
@@ -87,6 +80,8 @@ const sectionVariants = {
 	}),
 };
 
+const bannerImages = [Dummy1, Dummy2, Dummy3, Dummy4, Dummy5];
+
 export default function Home() {
 	const [searchSpin, setSearchSpin] = useState(false);
 	const searchInputRef = useRef(null);
@@ -99,16 +94,54 @@ export default function Home() {
 	const cardRef = useRef(null);
 	const cardInView = useInView(cardRef, { once: true });
 
+	// Carousel state
+	const [currentSlide, setCurrentSlide] = useState(0);
+	const totalSlides = 5;
+
+	// Auto-slide effect
+	React.useEffect(() => {
+		const interval = setInterval(() => {
+			setCurrentSlide((prev) => (prev + 1) % totalSlides);
+		}, 5000);
+		return () => clearInterval(interval);
+	}, []);
+
+	const goToPrev = () => setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+	const goToNext = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
+
+	// Card scroll state
+	const cardScrollRef = useRef(null);
+	const [cardIndex, setCardIndex] = useState(0);
+
+	// Auto-scroll effect for card banners
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCardIndex((prev) => (prev + 1) % cardBanners.length);
+		}, 4000); // 4 seconds per card
+		return () => clearInterval(interval);
+	}, []);
+
+	// Scroll to the current card
+	useEffect(() => {
+		if (cardScrollRef.current) {
+			const cardWidth = cardScrollRef.current.children[cardIndex]?.offsetWidth || 0;
+			cardScrollRef.current.scrollTo({
+				left: cardWidth * cardIndex,
+				behavior: "smooth",
+			});
+		}
+	}, [cardIndex]);
+
 	// Banner Area
 	return (
-		<div className="flex flex-col items-center w-full overflow-x-hidden relative" >
+		<div className="flex flex-col items-center w-full overflow-x-hidden relative">
 			{/* Decorative floating SaaS icons (background parallax) */}
 			<motion.img
 				src={codingIcon}
 				alt=""
 				className="hidden md:block absolute left-10 top-24 w-16 opacity-10 pointer-events-none z-0"
 				animate={{ y: [0, 20, 0] }}
-				transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+				transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
 				style={{ filter: "blur(1px)" }}
 			/>
 			<motion.img
@@ -120,67 +153,48 @@ export default function Home() {
 				style={{ filter: "blur(1px)" }}
 			/>
 
-			{/* Banner Area */}
-			<motion.div
-				className="w-full min-h-[340px] md:min-h-[500px] flex items-center justify-center bg-gradient-to-r from-[#e3f1fa] via-[#f5fafd] to-[#d0e7f7] overflow-x-hidden"
-				initial="hidden"
-				animate="visible"
-				variants={sectionVariants}
-			>
-				<div className="flex flex-col-reverse md:flex-row items-center justify-between w-full max-w-7xl mx-auto px-4 gap-6 md:gap-0 py-8 md:py-0">
-					{/* Left: Text and Button */}
-					<div className="w-full md:flex-1 flex flex-col items-center md:items-start justify-center">
-						<motion.h1
-							className="text-2xl md:text-5xl font-bold text-primary mb-3 text-center md:text-left max-w-xl"
-							variants={headlineVariants}
-							initial="hidden"
-							animate="visible"
+			{/* Banner Carousel */}
+			<div className="w-full h-[340px] md:h-[500px] flex items-center justify-center bg-gradient-to-r from-[#e3f1fa] via-[#f5fafd] to-[#d0e7f7] overflow-x-hidden relative">
+				<div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+					<AnimatePresence initial={false} mode="wait">
+						<motion.div
+							key={currentSlide}
+							initial={{ x: 300, opacity: 0 }}
+							animate={{ x: 0, opacity: 1 }}
+							exit={{ x: -300, opacity: 0 }}
+							transition={{ duration: 0.5, ease: "easeInOut" }}
+							className="absolute top-0 left-0 w-full h-full flex items-center justify-center"
 						>
-							Get All SaaS Application At One Stop
-						</motion.h1>
-						<motion.p
-							className="text-secondary mb-6 max-w-lg text-center md:text-left text-xs md:text-lg"
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 0.3, duration: 0.7 }}
-						>
-							Discover, compare, and access the best SaaS tools for your business
-							needs—all in one place.
-						</motion.p>
-						<div className="learn-more-btn w-full flex justify-center md:justify-start">
-							<motion.button
-								className="bg-primary text-accent rounded-lg font-semibold shadow hover:bg-primary-light transition text-base px-6 py-3 focus:outline-none relative"
-								whileHover={{ scale: 1.07 }}
-								animate={{ scale: [1, 1.05, 1] }}
-								transition={{
-									repeat: Infinity,
-									duration: 2,
-									ease: "easeInOut",
-								}}
-							>
-								Learn More
-								{/* Shine effect */}
-								<span className="absolute left-0 top-0 w-full h-full pointer-events-none overflow-hidden rounded-lg">
-									<span className="block w-1/3 h-full bg-gradient-to-r from-white/60 to-transparent absolute -left-1/3 top-0 animate-shine"></span>
-								</span>
-							</motion.button>
-						</div>
-					</div>
-					{/* Right: Banner Image with floating animation */}
-					<motion.div
-						className="w-full md:flex-1 flex justify-center md:justify-end"
-						animate={{ y: [0, -18, 0] }}
-						transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+							<img
+								src={bannerImages[currentSlide]}
+								alt={`Banner Slide ${currentSlide + 1}`}
+								className="w-full h-full object-cover"
+								style={{ background: "rgba(255,255,255,0.1)" }}
+							/>
+						</motion.div>
+					</AnimatePresence>
+					{/* Left Arrow */}
+					<button
+						className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow hover:bg-white transition z-20"
+						onClick={goToPrev}
+						aria-label="Previous Slide"
 					>
-						<img
-							src={Banner}
-							alt="Banner"
-							className="w-4/5 max-w-[320px] md:max-w-[500px] h-[140px] md:h-[360px] object-contain rounded-xl"
-							style={{ background: "rgba(255,255,255,0.1)" }}
-						/>
-					</motion.div>
+						<svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+							<path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
+						</svg>
+					</button>
+					{/* Right Arrow */}
+					<button
+						className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow hover:bg-white transition z-20"
+						onClick={goToNext}
+						aria-label="Next Slide"
+					>
+						<svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+							<path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+						</svg>
+					</button>
 				</div>
-			</motion.div>
+			</div>
 
 			{/* Search Bar */}
 			<motion.div
@@ -289,70 +303,55 @@ export default function Home() {
 				animate={cardInView ? "visible" : "hidden"}
 				variants={sectionVariants}
 			>
-				<div className="flex space-x-6 overflow-x-auto pb-4 hide-scrollbar">
-					{cardBanners.map((card, idx) => (
-						<motion.div
-							key={idx}
-							className="min-w-[280px] max-w-sm flex-shrink-0 rounded-3xl flex flex-col justify-between shadow-xl bg-gradient-to-br from-[#e3f1fa] to-[#7ec6f6] relative"
-							initial={{ opacity: 0, x: 80 }}
-							whileInView={{ opacity: 1, x: 0 }}
-							viewport={{ once: true }}
-							transition={{ delay: idx * 0.15, type: "spring", stiffness: 80 }}
-						>
-							<div className="p-6 flex flex-col h-full">
-								<h3 className="font-bold text-lg text-primary mb-2">
-									{card.title}
-								</h3>
-								<p className="text-main text-sm mb-3">{card.subtitle}</p>
-								<ul className="mb-3 list-disc list-inside text-[13px] text-secondary space-y-1">
-									{card.features.map((feature, i) => (
-										<li key={i}>{feature}</li>
-									))}
-								</ul>
-								<div className="font-bold text-primary mb-3 text-base">
-									{card.price}
-								</div>
-								<motion.button
-									className="bg-[#ff5c1a] text-white px-4 py-2 rounded-xl font-bold shadow hover:bg-[#ff7c3a] transition w-max text-sm relative overflow-hidden shine-btn"
-									whileHover={{ scale: 1.07 }}
-								>
-									{card.cta}
-									{/* Shine effect */}
-									<span className="absolute left-0 top-0 w-full h-full pointer-events-none overflow-hidden rounded-xl">
-										<span className="block w-1/3 h-full bg-gradient-to-r from-white/60 to-transparent absolute -left-1/3 top-0 shine-animate"></span>
-									</span>
-								</motion.button>
-							</div>
-							<motion.img
-								src={card.img}
-								alt={card.title}
-								className="absolute right-4 bottom-4 w-20 h-20 object-contain rounded-xl shadow-md"
-								animate={{ y: [0, -10, 0] }}
-								transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-							/>
-						</motion.div>
-					))}
+				<div className="relative">
+					{/* Left Arrow */}
+					<button
+						className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow hover:bg-white transition z-20"
+						onClick={() => setCardIndex((prev) => (prev - 1 + cardBanners.length) % cardBanners.length)}
+						aria-label="Previous Card"
+						style={{ left: "-24px" }}
+					>
+						<svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+							<path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
+						</svg>
+					</button>
+					{/* Cards */}
+					<div
+						className="flex space-x-6 overflow-x-auto pb-4 hide-scrollbar"
+						ref={cardScrollRef}
+						style={{ scrollBehavior: "smooth" }}
+					>
+						{cardBanners.map((card, idx) => (
+							<a
+								key={idx}
+								href={card.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="min-w-[320px] max-w-[400px] h-[220px] rounded-2xl flex-shrink-0 shadow-lg bg-center bg-cover transition-transform hover:scale-105 cursor-pointer"
+								style={{
+									backgroundImage: `url(${card.img})`,
+								}}
+							>
+								{/* No overlay/text */}
+							</a>
+						))}
+					</div>
+					{/* Right Arrow */}
+					<button
+						className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow hover:bg-white transition z-20"
+						onClick={() => setCardIndex((prev) => (prev + 1) % cardBanners.length)}
+						aria-label="Next Card"
+						style={{ right: "-24px" }}
+					>
+						<svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+							<path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+						</svg>
+					</button>
 				</div>
 				<style>{`
-          .hide-scrollbar::-webkit-scrollbar { display: none; }
-          .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-          /* Shine animation for buttons */
-          @keyframes shine {
-            0% { left: -40%; }
-            100% { left: 120%; }
-          }
-          .shine-btn .shine-animate {
-            animation: shine 1.2s linear infinite;
-          }
-          /* Shine for Learn More button */
-          @keyframes shineBtn {
-            0% { left: -40%; }
-            100% { left: 120%; }
-          }
-          .learn-more-btn .animate-shine {
-            animation: shineBtn 2.2s linear infinite;
-          }
-        `}</style>
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    `}</style>
 			</motion.div>
 		</div>
 	);

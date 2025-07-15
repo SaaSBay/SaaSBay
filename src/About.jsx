@@ -1,13 +1,34 @@
 import React from "react";
-import CountUp from "react-countup";
 import { motion } from "framer-motion";
-import { FaUsers, FaTags,FaRocket, FaBuilding, FaStar, FaGlobe, FaHeart, FaHandshake, FaLightbulb, FaUserFriends, FaCogs, FaChartBar, FaDatabase, FaShieldAlt } from "react-icons/fa";
-import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
+import CountUp from "react-countup";
+import {
+  FaGlobe,
+  FaBookOpen,
+  FaBullseye,
+  FaRocket,
+  FaLightbulb,
+  FaUsers,
+  FaTools,
+  FaCogs,
+  FaChartBar,
+  FaDatabase,
+  FaShieldAlt,
+  FaUserFriends,
+  FaBuilding,
+  FaHandshake,
+  FaHeart,
+  FaTags,
+  FaStar,
+} from "react-icons/fa";
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import "./About.css"; // Create this for custom styles/animations
+import "./About.css";
+import VendorPageImg from "./assets/VendorPageImg.png";
 
 // --- Data ---
-
 const stats = [
   { icon: <FaTags />, label: "SaaS Products", value: 50000 },
   { icon: <FaBuilding />, label: "Vendors", value: 5000 },
@@ -83,11 +104,11 @@ function AnimatedStats() {
       {stats.map((stat, i) => (
         <motion.div
           key={stat.label}
-          className="flex flex-col items-center bg-white/80 rounded-2xl shadow p-5"
+          className="flex flex-col items-center bg-gradient-to-br from-blue-100 via-white to-blue-50 rounded-2xl shadow-lg p-6 border border-blue-100"
           custom={i}
           variants={fadeInUp}
         >
-          <span className="text-primary text-3xl mb-2">{stat.icon}</span>
+          <span className="text-primary text-4xl mb-2 drop-shadow-lg">{stat.icon}</span>
           <CountUp
             end={stat.value}
             duration={2}
@@ -125,38 +146,28 @@ function TestimonialCarousel() {
   const [active, setActive] = React.useState(0);
   return (
     <div className="flex flex-col items-center gap-6 py-8">
-      <div className="flex gap-4">
+      <div className="flex gap-6 justify-center">
         {testimonials.map((t, i) => (
           <motion.div
             key={i}
-            className={`testimonial-card ${active === i ? "flipped" : ""}`}
+            className={`testimonial-card ${active === i ? "flipped" : ""} transition-transform duration-500`}
             onClick={() => setActive(i)}
             whileHover={{ scale: 1.05 }}
             tabIndex={0}
             style={{ cursor: "pointer" }}
           >
-            <div className="testimonial-front flex flex-col items-center bg-white rounded-2xl shadow-lg p-6 w-64 h-56 justify-center">
-              <img src={t.avatar} alt={t.name} className="w-14 h-14 rounded-full mb-3" />
+            <div className="testimonial-front flex flex-col items-center bg-white rounded-2xl shadow-lg p-6 w-72 h-56 justify-center border border-blue-100">
+              <img src={t.avatar} alt={t.name} className="w-14 h-14 rounded-full mb-3 shadow" />
               <p className="text-secondary text-sm mb-2">"{t.quote}"</p>
               <span className="font-bold text-primary">{t.name}</span>
               <span className="text-xs text-gray-500">{t.role}</span>
             </div>
-            <div className="testimonial-back flex flex-col items-center bg-primary text-accent rounded-2xl shadow-lg p-6 w-64 h-56 justify-center">
+            <div className="testimonial-back flex flex-col items-center bg-primary text-accent rounded-2xl shadow-lg p-6 w-72 h-56 justify-center border border-blue-100">
               <p className="mb-4">{t.more}</p>
               <span className="font-bold">{t.name}</span>
               <span className="text-xs">{t.role}</span>
             </div>
           </motion.div>
-        ))}
-      </div>
-      <div className="flex gap-2 mt-2">
-        {testimonials.map((_, i) => (
-          <button
-            key={i}
-            className={`w-3 h-3 rounded-full ${active === i ? "bg-primary" : "bg-gray-300"}`}
-            onClick={() => setActive(i)}
-            aria-label={`Go to testimonial ${i + 1}`}
-          />
         ))}
       </div>
     </div>
@@ -165,180 +176,344 @@ function TestimonialCarousel() {
 
 // --- Main Page ---
 
-export default function About() {
-  return (
-    <div className="about-bg min-h-screen w-full overflow-x-hidden" >
-      {/* Hero / Intro */}
-      <section className="w-full flex flex-col items-center justify-center min-h-[60vh] md:min-h-[80vh] py-12 px-4 md:px-0 relative text-center mt-10 md:mt-20">
-        <FaCogs className="text-primary absolute right-8 top-24 text-3xl md:text-5xl opacity-20 animate-float z-10" />
-        <FaChartBar className="text-secondary absolute left-10 bottom-16 text-3xl md:text-5xl opacity-20 animate-float-rev z-10" />
-        <FaDatabase className="text-primary absolute left-1/2 top-4 -translate-x-1/2 text-3xl md:text-5xl opacity-20 animate-float z-10" />
-        <FaShieldAlt className="text-secondary absolute right-16 md:right-32 top-1/2 text-3xl md:text-5xl opacity-20 animate-float z-10" />
-        <FaUserFriends className="text-primary absolute left-1/2 bottom-8 -translate-x-1/2 text-3xl md:text-5xl opacity-20 animate-float-slow z-10" />
-        {/* Headline and text */}
-        <motion.h1
-          className="text-3xl md:text-5xl font-extrabold text-primary mb-6 relative z-20"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-        >
-          <span className="text-secondary">SaaSBay</span>: The <span className="text-secondary">Largest</span>,<br />
-          Most <span className="text-secondary">Trusted</span> SaaS Marketplace
-        </motion.h1>
-        <motion.p
-          className="text-secondary text-lg md:text-2xl max-w-2xl mb-4 relative z-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.7 }}
-        >
-          Helping professionals and businesses make smarter software decisions<br className="hidden md:block" />
-          through authentic peer reviews.
-        </motion.p>
-        <motion.p
-          className="text-gray-500 max-w-xl mb-8 relative z-20"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.7 }}
-        >
-          Thousands of professionals rely on SaaSBay’s real user reviews to make confident software decisions.
-        </motion.p>
-        {/* Subtle animated background */}
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 about-gradient-bg"></div>
-      </section>
+const About = () => (
+  <div className="max-w-6xl mx-auto px-4 py-10 pt-16">
+    {/* About Us: Fade in with floating globe */}
+    <section className="w-full flex flex-col items-center justify-center min-h-[60vh] md:min-h-[80vh] py-12 px-4 md:px-0 relative text-center mt-10 md:mt-20">
+      <FaCogs className="text-primary absolute right-8 top-24 text-4xl md:text-6xl opacity-20 animate-float z-10" />
+      <FaChartBar className="text-secondary absolute left-10 bottom-16 text-4xl md:text-6xl opacity-20 animate-float-rev z-10" />
+      <FaDatabase className="text-primary absolute left-1/2 top-4 -translate-x-1/2 text-4xl md:text-6xl opacity-20 animate-float z-10" />
+      <FaShieldAlt className="text-secondary absolute right-16 md:right-32 top-1/2 text-4xl md:text-6xl opacity-20 animate-float z-10" />
+      <FaUserFriends className="text-primary absolute left-1/2 bottom-8 -translate-x-1/2 text-4xl md:text-6xl opacity-20 animate-float-slow z-10" />
+      {/* Headline and text */}
+      <motion.h1
+        className="text-4xl md:text-6xl font-extrabold text-primary mb-6 relative z-20 drop-shadow-lg"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+      >
+        <span className="text-secondary">SaaSBay</span>: India’s First Curated<br />
+        <span className="text-secondary">SaaS Marketplace</span>
+      </motion.h1>
+      <motion.p
+        className="text-secondary text-lg md:text-2xl max-w-2xl mb-4 relative z-20"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.7 }}
+      >
+        Discover, compare, and engage with trusted software solutions—<br className="hidden md:block" />
+        all in one place, designed for Indian businesses.
+      </motion.p>
+      <motion.p
+        className="text-gray-500 max-w-xl mb-8 relative z-20"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.7 }}
+      >
+        SaasBay brings clarity to every step of your software buying journey.<br />
+        Explore curated tools, evaluate with side-by-side comparisons, and connect directly with SaaS providers—whether you’re a startup or an established company.
+      </motion.p>
+      {/* Subtle animated background */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 about-gradient-bg"></div>
+    </section>
 
-      {/* Mission */}
-      <section className="w-full flex flex-col items-center py-10 px-4 md:px-0">
-        <motion.h2
-          className="text-2xl md:text-3xl font-bold text-primary mb-4"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="mb-10 p-6 rounded-lg shadow-md bg-gray-50"
+    >
+      <motion.h2
+        className="text-2xl md:text-3xl font-bold mb-3 flex items-center gap-2 justify-center"
+        whileHover={{ scale: 1.05 }}
+      >
+        <motion.span
+          className="animate-float"
+          whileHover={{ rotate: 360, transition: { duration: 0.5 } }}
         >
-          Our Mission & What Sets Us Apart
-        </motion.h2>
-        <motion.p
-          className="text-secondary text-center max-w-2xl mb-2"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
+          <FaGlobe className="text-blue-500" />
+        </motion.span>
+        About Us
+      </motion.h2>
+      <p className="text-base md:text-lg text-secondary">
+        At SaasBay, we believe that discovering the right software should be
+        simple, thoughtful, and empowering.
+        <br />
+        <br />
+        We are India’s first curated SaaS marketplace created to help businesses
+        explore, evaluate, and engage with the right technology solutions. With
+        thousands of SaaS products in the market, making confident choices can
+        often feel overwhelming.
+        <br />
+        <br />
+        To simplify this process, we built a platform that brings clarity to
+        every step of the software buying journey.
+        <br />
+        <br />
+        SaasBay helps you explore trusted tools, evaluate them with side-by-side
+        comparisons, and engage directly with SaaS Providers all in one place.
+        Whether you're a startup building your first tech stack or an
+        established company refining your operations, we make it easier to
+        navigate the software world with confidence.
+        <br />
+        <br />
+        Our approach is thoughtful, transparent, and designed around the needs
+        of Indian businesses. We’re not just building a marketplace, we’re
+        building a trusted space where software discovery feels guided, not
+        rushed.
+      </p>
+    </motion.section>
+
+    {/* Our Story: Slide in from left with timeline and flipping book icon */}
+    <motion.section
+      initial={{ opacity: 0, x: -100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="mb-10 p-6 rounded-lg shadow-md bg-gradient-to-br from-blue-50 via-white to-blue-100"
+    >
+      <motion.h2
+        className="text-2xl md:text-3xl font-bold mb-3 flex items-center gap-2 justify-center"
+        whileHover={{ scale: 1.05 }}
+      >
+        <motion.span
+          className="animate-float-slow"
+          whileHover={{ rotateY: 180, transition: { duration: 0.5 } }}
         >
-          We’re democratizing the way businesses find software, replacing outdated analyst reports with the real voices of users. At SaaSBay, your experience drives smarter, more transparent software choices.
-        </motion.p>
-        <motion.p
-          className="text-gray-500 text-center max-w-xl"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
+          <FaBookOpen className="text-green-500" />
+        </motion.span>
+        Our Story
+      </motion.h2>
+      <VerticalTimeline lineColor="#3b82f6">
+        <VerticalTimelineElement
+          iconStyle={{ background: "#3b82f6", color: "#fff" }}
+          icon={<FaBookOpen />}
         >
-          Building trust through authentic voices and verified reviews.
-        </motion.p>
-      </section>
-
-      {/* Timeline / Our Story */}
-      <section className="w-full py-10 px-0 md:px-0 bg-gradient-to-r from-[#e3f1fa] via-[#f5fafd] to-[#d0e7f7]">
-        <h2 className="text-2xl md:text-3xl font-bold text-primary text-center mb-8">Our Story</h2>
-        <AboutTimeline />
-      </section>
-
-      {/* By the Numbers */}
-      <section className="w-full flex flex-col items-center py-10 px-4 md:px-0">
-        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-8">By the Numbers</h2>
-        <AnimatedStats />
-      </section>
-
-      {/* How SaaSBay Works */}
-      <section className="w-full flex flex-col md:flex-row justify-center items-stretch gap-8 py-10 px-4 md:px-0">
-        <motion.div
-          className="flex-1 bg-white rounded-2xl shadow p-8 flex flex-col items-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
+          <h3 className="font-bold">The Frustration</h3>
+          <p>
+            The idea for SaasBay was born out of a simple but frustrating
+            experience trying to find the right SaaS product in a sea of
+            scattered information, confusing comparisons, and countless browser
+            tabs. As professionals ourselves, we realized how much time and
+            energy businesses were wasting just trying to make informed
+            decisions about the software they needed.
+          </p>
+        </VerticalTimelineElement>
+        <VerticalTimelineElement
+          iconStyle={{ background: "#fde68a", color: "#fff" }}
+          icon={<FaBullseye />}
         >
-          <FaUsers className="text-primary text-3xl mb-2" />
-          <h3 className="font-bold text-lg mb-2">For Buyers</h3>
-          <ul className="text-secondary text-center space-y-1 text-sm">
-            <li>Discover, compare, and review SaaS products</li>
-            <li>Use filters and side-by-side comparisons</li>
-            <li>Read authentic, peer-driven reviews</li>
-          </ul>
-        </motion.div>
-        <motion.div
-          className="flex-1 bg-white rounded-2xl shadow p-8 flex flex-col items-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
+          <h3 className="font-bold">The Gap</h3>
+          <p>
+            There was no single place where Indian businesses could explore
+            their options, evaluate features clearly, and connect with the right
+            vendors, especially across multiple SaaS categories. Most discovery
+            processes felt like guesswork, and great products often got lost in
+            the noise.
+          </p>
+        </VerticalTimelineElement>
+        <VerticalTimelineElement
+          iconStyle={{ background: "#f43f5e", color: "#fff" }}
+          icon={<FaRocket />}
         >
-          <FaBuilding className="text-primary text-3xl mb-2" />
-          <h3 className="font-bold text-lg mb-2">For Vendors</h3>
-          <ul className="text-secondary text-center space-y-1 text-sm">
-            <li>List your SaaS and manage your profile</li>
-            <li>Collect reviews and build reputation</li>
-            <li>Reach a global audience of high-intent buyers</li>
-          </ul>
-        </motion.div>
-      </section>
+          <h3 className="font-bold">The Opportunity</h3>
+          <p>
+            We saw an opportunity to bring structure to the chaos. With that,
+            SaasBay was envisioned as a purpose-built SaaS marketplace, one that
+            simplifies the way businesses discover software, while also
+            supporting emerging and established SaaS brands in showcasing their
+            solutions to the right audience.
+          </p>
+        </VerticalTimelineElement>
+        <VerticalTimelineElement
+          iconStyle={{ background: "#22c55e", color: "#fff" }}
+          icon={<FaTools />}
+        >
+          <h3 className="font-bold">The Goal</h3>
+          <p>
+            From our earliest idea to our current platform, the goal has always
+            been the same: To create a trusted space where software discovery is
+            not just easier, but smarter, for every business, at every stage.
+          </p>
+        </VerticalTimelineElement>
+      </VerticalTimeline>
+    </motion.section>
 
-      {/* Testimonials */}
-      <section className="w-full py-10 px-4 md:px-0 bg-gradient-to-r from-[#e3f1fa] via-[#f5fafd] to-[#d0e7f7]">
-        <h2 className="text-2xl md:text-3xl font-bold text-primary text-center mb-8">Customer Voices</h2>
-        <TestimonialCarousel />
-      </section>
-
-      {/* Culture & Values */}
-      <section className="w-full flex flex-col items-center py-10 px-4 md:px-0">
-        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-8">Culture & Values</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="flex flex-col items-center">
-            <FaRocket className="text-primary text-3xl mb-2" />
-            <span className="font-bold">Performance</span>
-            <span className="text-xs text-secondary text-center">We celebrate results and thoughtful work.</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <FaLightbulb className="text-primary text-3xl mb-2" />
-            <span className="font-bold">Entrepreneurship</span>
-            <span className="text-xs text-secondary text-center">Grit and innovation drive us forward.</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <FaHandshake className="text-primary text-3xl mb-2" />
-            <span className="font-bold">Authenticity</span>
-            <span className="text-xs text-secondary text-center">Real people, real reviews, real impact.</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <FaHeart className="text-primary text-3xl mb-2" />
-            <span className="font-bold">Kindness</span>
-            <span className="text-xs text-secondary text-center">Compassion and empathy in everything we do.</span>
-          </div>
+    <motion.section
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="mb-10 p-6 rounded-lg shadow-md bg-gray-50"
+    >
+      {/* Centered heading above flex row */}
+      <motion.h2
+        className="text-3xl md:text-4xl font-bold mb-6 flex items-center gap-2 justify-center text-primary text-center"
+        whileHover={{ scale: 1.05 }}
+      >
+        <motion.span
+          className="animate-float"
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 1, repeat: Infinity }}
+        >
+          <FaBullseye className="text-red-500" />
+        </motion.span>
+        Our Mission
+      </motion.h2>
+      <div className="flex flex-col md:flex-row items-center gap-8">
+        <div className="md:w-1/2 flex justify-center">
+          <img
+            src={VendorPageImg}
+            alt="Our Mission"
+            className="rounded-2xl shadow-lg w-full max-w-md object-cover"
+            style={{ transform: "rotate(-3deg)" }}
+          />
         </div>
-      </section>
-
-      {/* Social Impact */}
-      <section className="w-full flex flex-col items-center py-10 px-4 md:px-0">
-        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4">Giving Back</h2>
-        <p className="text-secondary text-center max-w-xl">
-          SaaSBay is committed to giving back. For every verified review, we donate to tech education for underrepresented communities.
-        </p>
-      </section>
-
-      {/* Call to Action */}
-      <section className="w-full flex flex-col items-center py-12 px-4 md:px-0">
-        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4">Ready to join the SaaSBay community?</h2>
-        <div className="flex flex-col md:flex-row gap-4">
-          <a href="/list-your-products" className="bg-primary text-accent px-6 py-3 rounded-lg font-semibold shadow hover:bg-primary-light transition text-base text-center">
-            List your SaaS
-          </a>
-          <a href="/leave-review" className="bg-accent text-primary px-6 py-3 rounded-lg font-semibold shadow hover:bg-primary/10 transition text-base text-center">
-            Leave a Review
-          </a>
-          <a href="/contact" className="bg-white border border-primary text-primary px-6 py-3 rounded-lg font-semibold shadow hover:bg-primary/10 transition text-base text-center">
-            Contact Us
-          </a>
+        <div className="md:w-1/2">
+          <p className="text-base md:text-lg text-secondary leading-relaxed text-center md:text-left">
+            At SaasBay, our mission is to transform how Indian businesses discover
+            and adopt software by making the journey smarter, simpler, and more
+            transparent. At the same time, we’re creating a dedicated platform for
+            SaaS providers to showcase their products, tell their stories, and
+            connect with the right audience at the right moment.
+            <br />
+            <br />
+            We’re here to empower every decision maker, from marketing and HR
+            managers to finance heads, product teams, revenue & growth, customer
+            support and business owners, with the clarity, confidence, and tools
+            they need to choose the right software solutions. For SaaS providers, we
+            offer a meaningful space to grow visibility, reach high-intent buyers,
+            and build lasting trust in a competitive market.
+            <br />
+            <br />
+            By bridging both sides of the ecosystem, SaasBay is building more than
+            just a marketplace — we're enabling better decisions, faster
+            connections, and a future where software adoption fuels business growth
+            at every level.
+          </p>
         </div>
-      </section>
-    </div>
-  );
-}
+      </div>
+    </motion.section>
+
+    {/* Who We Help: Image on the right, heading centered */}
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ staggerChildren: 0.3, duration: 0.8 }}
+      viewport={{ once: true }}
+      className="mb-10 p-8 rounded-2xl shadow-xl bg-gradient-to-br from-blue-50 via-white to-blue-100 max-w-4xl mx-auto border border-blue-100"
+    >
+      <div className="flex flex-col md:flex-row-reverse items-center gap-8">
+        <div className="md:w-1/2 flex justify-center">
+          <img
+            src={VendorPageImg}
+            alt="Who We Help"
+            className="rounded-2xl shadow-lg w-full max-w-md object-cover"
+            style={{ transform: "rotate(2deg)" }}
+          />
+        </div>
+        <div className="md:w-1/2 flex flex-col items-center">
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-2 justify-center text-primary text-center"
+            whileHover={{ scale: 1.05 }}
+          >
+            <motion.span className="animate-float-slow" whileHover={{ scale: 1.2 }}>
+              <FaUsers className="text-purple-500" />
+            </motion.span>
+            Who We Help
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-base md:text-lg text-secondary leading-relaxed text-center"
+          >
+            SaasBay is built for both sides of the software ecosystem — the
+            businesses searching for the right tools, and the SaaS providers
+            building them.
+            <br />
+            <br />
+            <span className="font-semibold">For Businesses:</span>
+            <br />
+            We help startups, SMEs, and growing enterprises across India discover
+            the software that fits their goals, budgets, and workflows. Whether it’s
+            a marketing lead searching for automation tools, an HR team exploring
+            HRMS options, or a founder building their tech stack, SaasBay makes
+            software selection simpler, smarter, and more confident.
+            <br />
+            <br />
+            <span className="font-semibold">For SaaS Providers:</span>
+            <br />
+            We support product creators, tech founders, and growth teams by offering
+            a platform to meaningfully present their solutions to the right
+            audience. From brand visibility to qualified leads, SaasBay helps SaaS
+            providers grow faster by being where businesses are actively looking for
+            them.
+          </motion.p>
+        </div>
+      </div>
+    </motion.section>
+
+    {/* Our Vision: Image on the left, heading centered */}
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="mb-10 p-8 rounded-2xl shadow-xl bg-white/90 max-w-4xl mx-auto border border-blue-100"
+    >
+      {/* Centered heading above flex row */}
+      <motion.h2
+        className="text-3xl md:text-4xl font-bold mb-6 flex items-center gap-2 justify-center text-primary text-center"
+        whileHover={{ scale: 1.05 }}
+      >
+        <motion.span
+          className="animate-float-slow"
+          animate={{
+            textShadow: ["0 0 5px #fff", "0 0 10px #fff", "0 0 5px #fff"],
+          }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <FaTools className="text-indigo-500" />
+        </motion.span>
+        Our Vision
+      </motion.h2>
+      <div className="flex flex-col md:flex-row items-center gap-8">
+        <div className="md:w-1/2 flex justify-center">
+          <img
+            src={VendorPageImg}
+            alt="Our Vision"
+            className="rounded-2xl shadow-lg w-full max-w-md object-cover"
+            style={{ transform: "rotate(-2deg)" }}
+          />
+        </div>
+        <div className="md:w-1/2 flex flex-col items-center">
+          <p className="text-base md:text-lg text-secondary leading-relaxed text-center md:text-left">
+            At SaasBay, our vision is to become the most trusted destination for
+            SaaS discovery and decision-making in India.
+            <br />
+            <br />
+            We imagine a future where every business — regardless of size or stage —
+            can confidently find the right software without guesswork. A future
+            where software adoption is driven by clarity, not clutter. Where SaaS
+            providers of all scales have a fair and focused platform to grow,
+            connect, and be discovered.
+            <br />
+            <br />
+            We’re building more than a marketplace. We’re shaping an ecosystem that
+            brings transparency to software buying, visibility to software makers,
+            and value to everyone involved.
+            <br />
+            <br />
+            As the Indian SaaS landscape continues to grow, SaasBay aspires to be
+            its most reliable guide, helping businesses and providers move forward,
+            together.
+          </p>
+        </div>
+      </div>
+    </motion.section>
+  </div>
+);
+
+export default About;
