@@ -2,25 +2,25 @@ import React from "react";
 import Logo from "../assets/SaasLogo.png"; // Adjust the path as needed
 
 const quickLinks = [
-  { name: "About", href: "#" },
-  { name: "Blogs", href: "#" },
-  { name: "Our Story", href: "#" },
-  { name: "Mission", href: "#" },
-  { name: "What We Do", href: "#" },
-  { name: "How We Are Different", href: "#" },
-  { name: "Our Vision", href: "#" },
+  { name: "About", href: "/SaaSBay/about" },
+  { name: "Our Story", href: "/SaaSBay/about#our-story" },
+  { name: "Mission", href: "/SaaSBay/about#mission" },
+  { name: "Who We Help", href: "/SaaSBay/about#who-we-help" },
+  { name: "Our Vision", href: "/SaaSBay/about#vision" },
+  { name: "Blogs", href: "/SaaSBay/blog" },
 ];
 
 const rightLinks = [
-  { name: "Home", href: "#" },
+  { name: "Home", href: "/SaaSBay/" },
   { name: "Terms and Conditions", href: "#" },
-  { name: "Categories", href: "#" },
-  { name: "Privacy Policy", href: "#" },
+  { name: "Categories", href: "/SaaSBay/#popular-categories" }, // <-- update here
+  { name: "Privacy Policy", href: "/SaaSBay/privacy-policy" },
+  {name : "term of use", href: "/SaaSBay/term-of-use"},
 ];
 
 const social = [
   { name: "Twitter", href: "https://twitter.com", icon: "fa-brands fa-twitter" },
-  { name: "LinkedIn", href: "https://linkedin.com", icon: "fa-brands fa-linkedin" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/saasbay/", icon: "fa-brands fa-linkedin" },
 ];
 
 export default function Footer() {

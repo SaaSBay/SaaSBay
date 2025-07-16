@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { FaRocket, FaUserPlus, FaClipboardList, FaCheckCircle, FaChartLine, FaBullhorn, FaStar, FaChartBar, FaHeadset, FaTrophy, FaChevronDown, FaChevronUp, FaBuilding } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaTrophy, FaTimes, FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { FaRocket, FaUserPlus, FaClipboardList, FaCheckCircle, FaChartLine, FaBullhorn, FaStar, FaChartBar, FaHeadset, FaChevronDown, FaChevronUp, FaBuilding } from "react-icons/fa";
 import SaaSIllustration from "./assets/VendorPageImg.png"; // Replace with your own SVG or illustration
+import "./listProduct.css"; // Import your styles
 
 const processSteps = [
   {
@@ -105,6 +107,88 @@ const faqs = [
 
 export default function ListProducts() {
   const [openFAQ, setOpenFAQ] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [phase, setPhase] = useState(1);
+  const [progress, setProgress] = useState(0);
+  const [vendorForm, setVendorForm] = useState({
+    name: "",
+    description: "",
+    logoUrl: "",
+    website: "",
+    categories: "",
+    contactEmail: "",
+    pricingType: "",
+    pricingRate: "",
+  });
+  const [productForm, setProductForm] = useState({
+    name: "",
+    description: "",
+    features: "",
+    pricingBasic: "",
+    pricingPro: "",
+    images: "",
+    categories: "",
+    integrationOptions: "",
+    trialAvailable: false,
+  });
+
+  // Calculate progress
+  const totalFields = phase === 1
+    ? 7 // vendor fields
+    : 8; // product fields
+  const filledFields = phase === 1
+    ? Object.values(vendorForm).filter(v => v && v !== "").length
+    : Object.values(productForm).filter(v => v && v !== "").length;
+  const progressPercent = Math.round((filledFields / totalFields) * 100);
+
+  // Handle input change
+  const handleChange = (e, formType) => {
+    const { name, value, type, checked } = e.target;
+    if (formType === "vendor") {
+      setVendorForm({ ...vendorForm, [name]: value });
+    } else {
+      setProductForm({
+        ...productForm,
+        [name]: type === "checkbox" ? checked : value,
+      });
+    }
+  };
+
+  // Validate mandatory fields
+  const vendorMandatory = ["name", "description", "contactEmail", "website", "categories"];
+  const productMandatory = ["name", "description", "features", "pricingBasic", "categories"];
+
+  const isVendorValid = vendorMandatory.every(f => vendorForm[f]);
+  const isProductValid = productMandatory.every(f => productForm[f]);
+
+  // Submit handler (dummy)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // You can send vendorForm & productForm to API here
+    setShowModal(false);
+    setPhase(1);
+    setVendorForm({
+      name: "",
+      description: "",
+      logoUrl: "",
+      website: "",
+      categories: "",
+      contactEmail: "",
+      pricingType: "",
+      pricingRate: "",
+    });
+    setProductForm({
+      name: "",
+      description: "",
+      features: "",
+      pricingBasic: "",
+      pricingPro: "",
+      images: "",
+      categories: "",
+      integrationOptions: "",
+      trialAvailable: false,
+    });
+  };
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-gradient-to-br from-[#e3f1fa] via-[#f5fafd] to-[#d0e7f7]">
@@ -278,17 +362,258 @@ export default function ListProducts() {
       </section>
 
       {/* Final CTA */}
-      <section className="w-full flex flex-col items-center py-16 px-4 md:px-0 bg-gradient-to-r from-primary to-accent">
-        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Ready to List Your SaaS Product?</h2>
-        <a
-          id="register"
-          href="#"
-          className="bg-white text-primary px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-accent hover:text-primary transition text-lg flex items-center gap-3"
+      <section  className="w-full flex flex-col items-center py-16 px-4 md:px-0 bg-gradient-to-r from-primary to-accent">
+        <h2 id="register" className="text-2xl md:text-3xl font-bold text-primary mb-6">Ready to List Your SaaS Product?</h2>
+        <button
+          
+          onClick={() => setShowModal(true)}
+          className="bg-accent border-2 text-primary px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-3"
         >
           <FaTrophy className="text-yellow-400 text-2xl" />
           Register as a Vendor
-        </a>
+        </button>
       </section>
+
+      {/* Modal Form */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-xl mx-auto p-8 relative flex flex-col"
+              initial={{ scale: 0.95, y: 40 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 40 }}
+            >
+              <button
+                className="absolute top-4 right-4 bg-accent text-primary px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-2"
+                onClick={() => setShowModal(false)}
+                aria-label="Close"
+              >
+                <FaTimes />
+              </button>
+              {/* Progress Bar */}
+              <div className="w-full mb-6">
+                <div className="flex items-center justify-start gap-x-2 mb-2">
+                  <span className="text-sm font-semibold text-primary">
+                    {phase === 1 ? "Vendor Details" : "Product Details"}
+                  </span>
+                  <span className="text-xs text-secondary">{progressPercent}% complete</span>
+                </div>
+                <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className={`h-2 rounded-full transition-all`}
+                    style={{
+                      width: `${progressPercent}%`,
+                      background: "linear-gradient(90deg,#3b82f6,#7ec6f6)",
+                    }}
+                  />
+                </div>
+              </div>
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                {phase === 1 ? (
+                  <>
+                    <h3 className="text-lg font-bold text-primary mb-2">Vendor Details</h3>
+                    <input
+                      name="name"
+                      type="text"
+                      required
+                      placeholder="Vendor Name *"
+                      className="input"
+                      value={vendorForm.name}
+                      onChange={e => handleChange(e, "vendor")}
+                    />
+                    <input
+                      name="description"
+                      type="text"
+                      required
+                      placeholder="Vendor Description *"
+                      className="input"
+                      value={vendorForm.description}
+                      onChange={e => handleChange(e, "vendor")}
+                    />
+                    <input
+                      name="logoUrl"
+                      type="url"
+                      placeholder="Logo URL"
+                      className="input"
+                      value={vendorForm.logoUrl}
+                      onChange={e => handleChange(e, "vendor")}
+                    />
+                    <input
+                      name="website"
+                      type="url"
+                      required
+                      placeholder="Website *"
+                      className="input"
+                      value={vendorForm.website}
+                      onChange={e => handleChange(e, "vendor")}
+                    />
+                    <input
+                      name="categories"
+                      type="text"
+                      required
+                      placeholder="Categories (comma separated) *"
+                      className="input"
+                      value={vendorForm.categories}
+                      onChange={e => handleChange(e, "vendor")}
+                    />
+                    <input
+                      name="contactEmail"
+                      type="email"
+                      required
+                      placeholder="Contact Email *"
+                      className="input"
+                      value={vendorForm.contactEmail}
+                      onChange={e => handleChange(e, "vendor")}
+                    />
+                    <div className="flex gap-3">
+                      <select
+                        name="pricingType"
+                        className="input"
+                        value={vendorForm.pricingType}
+                        onChange={e => handleChange(e, "vendor")}
+                      >
+                        <option value="">Pricing Model</option>
+                        <option value="commission">Commission</option>
+                        <option value="subscription">Subscription</option>
+                        <option value="other">Other</option>
+                      </select>
+                      <input
+                        name="pricingRate"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="Rate (%)"
+                        className="input"
+                        value={vendorForm.pricingRate}
+                        onChange={e => handleChange(e, "vendor")}
+                      />
+                    </div>
+                    <div className="flex justify-end gap-3 mt-2">
+                      <button
+                        type="button"
+                        className="bg-accent text-primary px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-2"
+                        disabled={!isVendorValid}
+                        onClick={() => setPhase(2)}
+                      >
+                        Next <FaChevronRight />
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h3 className="text-lg font-bold text-primary mb-2">Product Details</h3>
+                    <input
+                      name="name"
+                      type="text"
+                      required
+                      placeholder="Product Name *"
+                      className="input"
+                      value={productForm.name}
+                      onChange={e => handleChange(e, "product")}
+                    />
+                    <input
+                      name="description"
+                      type="text"
+                      required
+                      placeholder="Product Description *"
+                      className="input"
+                      value={productForm.description}
+                      onChange={e => handleChange(e, "product")}
+                    />
+                    <input
+                      name="features"
+                      type="text"
+                      required
+                      placeholder="Features (comma separated) *"
+                      className="input"
+                      value={productForm.features}
+                      onChange={e => handleChange(e, "product")}
+                    />
+                    <div className="flex gap-3">
+                      <input
+                        name="pricingBasic"
+                        type="number"
+                        required
+                        placeholder="Basic Price (INR) *"
+                        className="input"
+                        value={productForm.pricingBasic}
+                        onChange={e => handleChange(e, "product")}
+                      />
+                      <input
+                        name="pricingPro"
+                        type="number"
+                        placeholder="Pro Price (INR)"
+                        className="input"
+                        value={productForm.pricingPro}
+                        onChange={e => handleChange(e, "product")}
+                      />
+                    </div>
+                    <input
+                      name="images"
+                      type="text"
+                      placeholder="Image URLs (comma separated)"
+                      className="input"
+                      value={productForm.images}
+                      onChange={e => handleChange(e, "product")}
+                    />
+                    <input
+                      name="categories"
+                      type="text"
+                      required
+                      placeholder="Categories (comma separated) *"
+                      className="input"
+                      value={productForm.categories}
+                      onChange={e => handleChange(e, "product")}
+                    />
+                    <input
+                      name="integrationOptions"
+                      type="text"
+                      placeholder="Integration Options (comma separated)"
+                      className="input"
+                      value={productForm.integrationOptions}
+                      onChange={e => handleChange(e, "product")}
+                    />
+                    <label className="flex items-center gap-2 mt-2">
+                      <input
+                        name="trialAvailable"
+                        type="checkbox"
+                        checked={productForm.trialAvailable}
+                        onChange={e => handleChange(e, "product")}
+                      />
+                      <span className="text-secondary text-sm">Trial Available</span>
+                    </label>
+                    <div className="flex justify-between gap-3 mt-2">
+                      <button
+                        type="button"
+                        className="bg-accent text-primary px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-2F"
+                        onClick={() => setPhase(1)}
+                      >
+                        <FaChevronLeft /> Back
+                      </button>
+                      <button
+                        type="submit"
+                        className="bg-primary text-accent px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-2"
+                        disabled={!isProductValid}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </>
+                )}
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
+
+// Add this to your CSS or Tailwind config for .input
+// .input { @apply w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary transition; }

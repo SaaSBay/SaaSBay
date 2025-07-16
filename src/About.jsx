@@ -274,6 +274,7 @@ const About = () => (
       className="mb-10 p-6 rounded-lg shadow-md bg-gradient-to-br from-blue-50 via-white to-blue-100"
     >
       <motion.h2
+        id="our-story"
         className="text-2xl md:text-3xl font-bold mb-3 flex items-center gap-2 justify-center"
         whileHover={{ scale: 1.05 }}
       >
@@ -349,6 +350,7 @@ const About = () => (
     >
       {/* Centered heading above flex row */}
       <motion.h2
+        id="mission"
         className="text-3xl md:text-4xl font-bold mb-6 flex items-center gap-2 justify-center text-primary text-center"
         whileHover={{ scale: 1.05 }}
       >
@@ -415,6 +417,7 @@ const About = () => (
         </div>
         <div className="md:w-1/2 flex flex-col items-center">
           <motion.h2
+            id="who-we-help"
             className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-2 justify-center text-primary text-center"
             whileHover={{ scale: 1.05 }}
           >
@@ -465,6 +468,7 @@ const About = () => (
     >
       {/* Centered heading above flex row */}
       <motion.h2
+        id="vision"
         className="text-3xl md:text-4xl font-bold mb-6 flex items-center gap-2 justify-center text-primary text-center"
         whileHover={{ scale: 1.05 }}
       >

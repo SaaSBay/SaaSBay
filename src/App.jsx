@@ -10,6 +10,8 @@ import Blog from './Blog';
 import BlogDetail from './BlogDetail';
 import ListProducts from './ListProducts';
 import Marketplace from './components/Marketplace.jsx';
+import TermOfUse from './TermOfUse.jsx';
+import PrivacyPolicy from './PrivacyPolicy.jsx';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path="/blog/:title" element={<BlogDetail />} />
         <Route path="/list-your-products" element={<ListProducts />} />
         <Route path="/marketplace" element={<Marketplace />} />
+        <Route path="/term-of-use" element={<TermOfUse />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         {/* Add more routes as needed */}
       </Routes>
       <Footer />
