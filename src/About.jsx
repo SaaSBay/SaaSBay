@@ -201,7 +201,7 @@ const About = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.7 }}
       >
-        Discover, compare, and engage with trusted software solutions—<br className="hidden md:block" />
+        Discover, compare, and choose with trusted software solutions—<br className="hidden md:block" />
         all in one place, designed for Indian businesses.
       </motion.p>
       <motion.p
@@ -291,7 +291,7 @@ const About = () => (
           iconStyle={{ background: "#3b82f6", color: "#fff" }}
           icon={<FaBookOpen />}
         >
-          <h3 className="font-bold">The Frustration</h3>
+          <h3 className="font-bold">The Foundation</h3>
           <p>
             The idea for SaasBay was born out of a simple but frustrating
             experience trying to find the right SaaS product in a sea of

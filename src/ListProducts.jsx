@@ -112,13 +112,13 @@ export default function ListProducts() {
   const [progress, setProgress] = useState(0);
   const [vendorForm, setVendorForm] = useState({
     name: "",
-    description: "",
-    logoUrl: "",
-    website: "",
-    categories: "",
-    contactEmail: "",
-    pricingType: "",
-    pricingRate: "",
+    designation: "",
+    email: "",
+    contactNumber: "",
+    companyName: "",
+    category: "",
+    subCategory: "",
+    gstNo: "",
   });
   const [productForm, setProductForm] = useState({
     name: "",
@@ -155,7 +155,14 @@ export default function ListProducts() {
   };
 
   // Validate mandatory fields
-  const vendorMandatory = ["name", "description", "contactEmail", "website", "categories"];
+  const vendorMandatory = [
+    "name",
+    "designation",
+    "email",
+    "contactNumber",
+    "companyName",
+    "category",
+  ];
   const productMandatory = ["name", "description", "features", "pricingBasic", "categories"];
 
   const isVendorValid = vendorMandatory.every(f => vendorForm[f]);
@@ -169,13 +176,13 @@ export default function ListProducts() {
     setPhase(1);
     setVendorForm({
       name: "",
-      description: "",
-      logoUrl: "",
-      website: "",
-      categories: "",
-      contactEmail: "",
-      pricingType: "",
-      pricingRate: "",
+      designation: "",
+      email: "",
+      contactNumber: "",
+      companyName: "",
+      category: "",
+      subCategory: "",
+      gstNo: "",
     });
     setProductForm({
       name: "",
@@ -243,7 +250,7 @@ export default function ListProducts() {
           {processSteps.map((step, i) => (
             <motion.div
               key={step.title}
-              className="flex flex-col items-center bg-white rounded-2xl shadow p-6 w-full md:w-56 relative"
+              className="flex flex-col items-center bg-white rounded-2xl shadow p-6 w-full md:w-56 min-h-[220px] md:min-h-[260px] relative" 
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -294,7 +301,13 @@ export default function ListProducts() {
         </div>
       </section>
 
+
+    {/* hidden for now */}
       {/* Vendor Success Stories */}
+      
+        {/* Logo Bar */}
+
+{/* 
       <section className="w-full flex flex-col items-center py-16 px-4 md:px-0">
         <h2 className="text-2xl md:text-3xl font-bold text-primary mb-10">Vendor Success Stories</h2>
         <div className="flex flex-col md:flex-row gap-8 max-w-4xl w-full items-center justify-center">
@@ -314,7 +327,6 @@ export default function ListProducts() {
             </motion.div>
           ))}
         </div>
-        {/* Logo Bar */}
         <div className="flex gap-8 mt-10 items-center justify-center flex-wrap">
           {vendorLogos.map((logo, i) => (
             <img
@@ -326,7 +338,7 @@ export default function ListProducts() {
             />
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* FAQ */}
       <section className="w-full flex flex-col items-center py-16 px-4 md:px-0 bg-accent">
@@ -384,7 +396,7 @@ export default function ListProducts() {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-xl mx-auto p-8 relative flex flex-col"
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-xl mx-auto p-8 relative flex flex-col overflow-y-auto max-h-[90vh]" // <-- Enable vertical scrolling
               initial={{ scale: 0.95, y: 40 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 40 }}
@@ -400,7 +412,7 @@ export default function ListProducts() {
               <div className="w-full mb-6">
                 <div className="flex items-center justify-start gap-x-2 mb-2">
                   <span className="text-sm font-semibold text-primary">
-                    {phase === 1 ? "Vendor Details" : "Product Details"}
+                    Vendor Registration Request
                   </span>
                   <span className="text-xs text-secondary">{progressPercent}% complete</span>
                 </div>
@@ -415,197 +427,89 @@ export default function ListProducts() {
                 </div>
               </div>
               <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                {phase === 1 ? (
-                  <>
-                    <h3 className="text-lg font-bold text-primary mb-2">Vendor Details</h3>
-                    <input
-                      name="name"
-                      type="text"
-                      required
-                      placeholder="Vendor Name *"
-                      className="input"
-                      value={vendorForm.name}
-                      onChange={e => handleChange(e, "vendor")}
-                    />
-                    <input
-                      name="description"
-                      type="text"
-                      required
-                      placeholder="Vendor Description *"
-                      className="input"
-                      value={vendorForm.description}
-                      onChange={e => handleChange(e, "vendor")}
-                    />
-                    <input
-                      name="logoUrl"
-                      type="url"
-                      placeholder="Logo URL"
-                      className="input"
-                      value={vendorForm.logoUrl}
-                      onChange={e => handleChange(e, "vendor")}
-                    />
-                    <input
-                      name="website"
-                      type="url"
-                      required
-                      placeholder="Website *"
-                      className="input"
-                      value={vendorForm.website}
-                      onChange={e => handleChange(e, "vendor")}
-                    />
-                    <input
-                      name="categories"
-                      type="text"
-                      required
-                      placeholder="Categories (comma separated) *"
-                      className="input"
-                      value={vendorForm.categories}
-                      onChange={e => handleChange(e, "vendor")}
-                    />
-                    <input
-                      name="contactEmail"
-                      type="email"
-                      required
-                      placeholder="Contact Email *"
-                      className="input"
-                      value={vendorForm.contactEmail}
-                      onChange={e => handleChange(e, "vendor")}
-                    />
-                    <div className="flex gap-3">
-                      <select
-                        name="pricingType"
-                        className="input"
-                        value={vendorForm.pricingType}
-                        onChange={e => handleChange(e, "vendor")}
-                      >
-                        <option value="">Pricing Model</option>
-                        <option value="commission">Commission</option>
-                        <option value="subscription">Subscription</option>
-                        <option value="other">Other</option>
-                      </select>
-                      <input
-                        name="pricingRate"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="Rate (%)"
-                        className="input"
-                        value={vendorForm.pricingRate}
-                        onChange={e => handleChange(e, "vendor")}
-                      />
-                    </div>
-                    <div className="flex justify-end gap-3 mt-2">
-                      <button
-                        type="button"
-                        className="bg-accent text-primary px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-2"
-                        disabled={!isVendorValid}
-                        onClick={() => setPhase(2)}
-                      >
-                        Next <FaChevronRight />
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <h3 className="text-lg font-bold text-primary mb-2">Product Details</h3>
-                    <input
-                      name="name"
-                      type="text"
-                      required
-                      placeholder="Product Name *"
-                      className="input"
-                      value={productForm.name}
-                      onChange={e => handleChange(e, "product")}
-                    />
-                    <input
-                      name="description"
-                      type="text"
-                      required
-                      placeholder="Product Description *"
-                      className="input"
-                      value={productForm.description}
-                      onChange={e => handleChange(e, "product")}
-                    />
-                    <input
-                      name="features"
-                      type="text"
-                      required
-                      placeholder="Features (comma separated) *"
-                      className="input"
-                      value={productForm.features}
-                      onChange={e => handleChange(e, "product")}
-                    />
-                    <div className="flex gap-3">
-                      <input
-                        name="pricingBasic"
-                        type="number"
-                        required
-                        placeholder="Basic Price (INR) *"
-                        className="input"
-                        value={productForm.pricingBasic}
-                        onChange={e => handleChange(e, "product")}
-                      />
-                      <input
-                        name="pricingPro"
-                        type="number"
-                        placeholder="Pro Price (INR)"
-                        className="input"
-                        value={productForm.pricingPro}
-                        onChange={e => handleChange(e, "product")}
-                      />
-                    </div>
-                    <input
-                      name="images"
-                      type="text"
-                      placeholder="Image URLs (comma separated)"
-                      className="input"
-                      value={productForm.images}
-                      onChange={e => handleChange(e, "product")}
-                    />
-                    <input
-                      name="categories"
-                      type="text"
-                      required
-                      placeholder="Categories (comma separated) *"
-                      className="input"
-                      value={productForm.categories}
-                      onChange={e => handleChange(e, "product")}
-                    />
-                    <input
-                      name="integrationOptions"
-                      type="text"
-                      placeholder="Integration Options (comma separated)"
-                      className="input"
-                      value={productForm.integrationOptions}
-                      onChange={e => handleChange(e, "product")}
-                    />
-                    <label className="flex items-center gap-2 mt-2">
-                      <input
-                        name="trialAvailable"
-                        type="checkbox"
-                        checked={productForm.trialAvailable}
-                        onChange={e => handleChange(e, "product")}
-                      />
-                      <span className="text-secondary text-sm">Trial Available</span>
-                    </label>
-                    <div className="flex justify-between gap-3 mt-2">
-                      <button
-                        type="button"
-                        className="bg-accent text-primary px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-2F"
-                        onClick={() => setPhase(1)}
-                      >
-                        <FaChevronLeft /> Back
-                      </button>
-                      <button
-                        type="submit"
-                        className="bg-primary text-accent px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-2"
-                        disabled={!isProductValid}
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </>
-                )}
+                <h3 className="text-lg font-bold text-primary mb-2">Vendor Registration Request Form</h3>
+                <input
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="Name *"
+                  className="input"
+                  value={vendorForm.name}
+                  onChange={e => handleChange(e, "vendor")}
+                />
+                <input
+                  name="designation"
+                  type="text"
+                  required
+                  placeholder="Designation *"
+                  className="input"
+                  value={vendorForm.designation}
+                  onChange={e => handleChange(e, "vendor")}
+                />
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="Email *"
+                  className="input"
+                  value={vendorForm.email}
+                  onChange={e => handleChange(e, "vendor")}
+                />
+                <input
+                  name="contactNumber"
+                  type="tel"
+                  required
+                  placeholder="Contact Number *"
+                  className="input"
+                  value={vendorForm.contactNumber}
+                  onChange={e => handleChange(e, "vendor")}
+                />
+                <input
+                  name="companyName"
+                  type="text"
+                  required
+                  placeholder="Company Name *"
+                  className="input"
+                  value={vendorForm.companyName}
+                  onChange={e => handleChange(e, "vendor")}
+                />
+                <input
+                  name="category"
+                  type="text"
+                  required
+                  placeholder="Category *"
+                  className="input"
+                  value={vendorForm.category}
+                  onChange={e => handleChange(e, "vendor")}
+                />
+                <input
+                  name="subCategory"
+                  type="text"
+                  placeholder="Sub Category (if any)"
+                  className="input"
+                  value={vendorForm.subCategory}
+                  onChange={e => handleChange(e, "vendor")}
+                />
+                <input
+                  name="gstNo"
+                  type="text"
+                  placeholder="GST NO (optional)"
+                  className="input"
+                  value={vendorForm.gstNo}
+                  onChange={e => handleChange(e, "vendor")}
+                />
+                <div className="text-secondary text-xs mt-2 mb-4">
+                  Note: we will get back to you via email in next 48hrs
+                </div>
+                <div className="flex justify-end gap-3 mt-2">
+                  <button
+                    type="submit"
+                    className="bg-primary text-accent px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-2"
+                    disabled={!isVendorValid}
+                  >
+                    Submit
+                  </button>
+                </div>
               </form>
             </motion.div>
           </motion.div>

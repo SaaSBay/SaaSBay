@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../assets/SaasLogo.png"; // Adjust the path as needed
 
-const quickLinks = [
+const companyLinks = [
   { name: "About", href: "/SaaSBay/about" },
   { name: "Our Story", href: "/SaaSBay/about#our-story" },
   { name: "Mission", href: "/SaaSBay/about#mission" },
@@ -10,12 +10,15 @@ const quickLinks = [
   { name: "Blogs", href: "/SaaSBay/blog" },
 ];
 
-const rightLinks = [
-  { name: "Home", href: "/SaaSBay/" },
-  { name: "Terms and Conditions", href: "#" },
-  { name: "Categories", href: "/SaaSBay/#popular-categories" }, // <-- update here
+const resourcesLinks = [
+  { name: "Categories", href: "/SaaSBay/#popular-categories" },
   { name: "Privacy Policy", href: "/SaaSBay/privacy-policy" },
-  {name : "term of use", href: "/SaaSBay/term-of-use"},
+  { name: "Terms of Use", href: "/SaaSBay/term-of-use" },
+  { name: "Terms and Conditions", href: "#" },
+];
+
+const supportLinks = [
+  { name: "Contact Us", href: "/SaaSBay/contact" },
 ];
 
 const social = [
@@ -27,20 +30,20 @@ export default function Footer() {
   return (
     <footer className="bg-[#f5fafd] border-t border-gray-200 mt-16">
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-          {/* Left: Logo & Social */}
-          <div className="flex flex-col items-center md:items-start">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 items-start">
+          {/* Logo & Social */}
+          <div className="flex flex-col items-center md:items-start col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <img
                 src={Logo}
                 alt="SaaSBay Logo"
-                className="h-10 w-auto"
+                className="h-20 w-auto"
               />
-              <span className="text-primary font-extrabold text-2xl tracking-tight">
+              <span className="text-primary font-extrabold text-4xl tracking-tight">
                 SaaSBay
               </span>
             </div>
-            <p className="text-secondary text-sm mb-4 max-w-xs text-center md:text-left">
+            <p className="text-secondary text-lgx mb-4 max-w-xs text-center md:text-left">
               Discover, compare, and choose the best SaaS solutions for your business.
             </p>
             <div className="flex gap-4 justify-center md:justify-start w-full">
@@ -59,11 +62,12 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Middle: Quick Links */}
-          <div>
-            <span className="font-semibold text-secondary mb-3 text-lg block text-center md:text-left">Quick Links</span>
+              
+          {/* Company */}
+          <div className="px-10 md:px-20">
+            <span className="font-semibold text-secondary mb-3 text-lg block text-center md:text-left">Company</span>
             <ul className="space-y-2 text-center md:text-left">
-              {quickLinks.map((link) => (
+              {companyLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
@@ -76,11 +80,28 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Right: More Links */}
-          <div>
-            <span className="font-semibold text-secondary mb-3 text-lg block text-center md:text-left">More</span>
+          {/* Resources */}
+          <div className="px-10 md:px-10">
+            <span className="font-semibold text-secondary mb-3 text-lg block text-center md:text-left">Resources</span>
             <ul className="space-y-2 text-center md:text-left">
-              {rightLinks.map((link) => (
+              {resourcesLinks.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    className="text-secondary hover:text-primary transition-colors text-base"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div className="px-10 md:px-10">
+            <span className="font-semibold text-secondary mb-3 text-lg block text-center md:text-left">Support</span>
+            <ul className="space-y-2 text-center md:text-left">
+              {supportLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
