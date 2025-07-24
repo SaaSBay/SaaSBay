@@ -18,7 +18,7 @@ const resourcesLinks = [
 ];
 
 const supportLinks = [
-  { name: "Contact Us", href: "/SaaSBay/contact" },
+  { name: "Contact Us", href: "/SaaSBay/#contact-us" },
 ];
 
 const social = [
@@ -43,6 +43,7 @@ export default function Footer() {
                 SaaSBay
               </span>
             </div>
+            <p>Explore, Evaluate, Engage</p>
             <p className="text-secondary text-lgx mb-4 max-w-xs text-center md:text-left">
               Discover, compare, and choose the best SaaS solutions for your business.
             </p>

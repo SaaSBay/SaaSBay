@@ -5,6 +5,7 @@ import {
   useInView,
   AnimatePresence,
 } from "framer-motion";
+import ContactSection from "./ContactUs";
 import accountingIcon from "./assets/accounting.svg";
 import supportIcon from "./assets/support.svg";
 import codingIcon from "./assets/coding.svg";
@@ -13,7 +14,7 @@ import salesIcon from "./assets/sales.svg";
 import Dummy1 from "./assets/Dummy_1.png";
 import Dummy2 from "./assets/Dummy_2.png";
 import Dummy3 from "./assets/Dummy_3.png";
-import ContactUs from "./assets/ContactUs.jpg";
+
 
 const categories = [
   {
@@ -371,94 +372,8 @@ export default function Home() {
       </motion.section>
 
       {/* Contact Us Section - Split Card Style */}
-<motion.section
-  className="w-full max-w-4xl mx-auto mt-20 mb-16 px-0 py-0 rounded-2xl shadow-xl flex flex-col items-center relative overflow-hidden"
-  initial={{ opacity: 0, scale: 0.95, y: 40 }}
-  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.8, type: "spring" }}
->
-  <div className="flex flex-col md:flex-row w-full h-full bg-gradient-to-r from-blue-100 via-accent/10 to-primary/10 rounded-2xl overflow-hidden">
-    {/* Form Side */}
-    <div className="flex-1 flex flex-col justify-center items-center px-8 py-10 bg-white">
-      
-      <div className="flex flex-col items-center mb-2">
-        <svg className="w-10 h-10 text-accent mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2 8l10 6 10-6" />
-        </svg>
-        <h2 className="text-2xl md:text-3xl font-bold text-primary text-center">
-          Contact Us
-        </h2>
-      </div>
-      <p className="text-secondary text-base mb-6 text-center">
-        Have questions, feedback, or want to partner with us?<br />
-        Our team is here to help you succeed. Reach out and let’s build something amazing together!
-      </p>
-      <form
-        className="w-full flex flex-col gap-4"
-        onSubmit={e => {
-          e.preventDefault();
-          alert("Thank you for contacting us! We'll get back to you soon.");
-        }}
-      >
-        <motion.input
-          type="text"
-          name="name"
-          required
-          placeholder="Your Name"
-          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary transition"
-          whileFocus={{ scale: 1.03, boxShadow: "0 0 0 4px #7ec6f6" }}
-        />
-        <motion.input
-          type="email"
-          name="email"
-          required
-          placeholder="Your Email"
-          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary transition"
-          whileFocus={{ scale: 1.03, boxShadow: "0 0 0 4px #7ec6f6" }}
-        />
-        <motion.textarea
-          name="message"
-          required
-          placeholder="Your Message"
-          rows={4}
-          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary transition resize-none"
-          whileFocus={{ scale: 1.03, boxShadow: "0 0 0 4px #7ec6f6" }}
-        />
-        <motion.button
-          type="submit"
-          className="bg-primary text-accent px-6 py-3 rounded-xl font-semibold shadow hover:bg-primary-light transition text-base mt-2"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-        >
-          Send Message
-        </motion.button>
-      </form>
-    </div>
-    {/* Illustration Side */}
-    <div className="flex-1 flex flex-col justify-center items-center bg-gradient-to-br from-blue-100 via-accent/10 to-primary/10 relative">
-      <motion.img
-        src={ContactUs}
-        alt="Contact Illustration"
-        className="w-40 h-40 md:w-64 md:h-64 object-contain mt-10 mb-6"
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.8, type: "spring" }}
-        draggable={false}
-        style={{ userSelect: "none" }}
-      />
-      <motion.div
-        className="absolute bottom-8 right-8 w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center z-0"
-        animate={{ y: [0, 18, 0], x: [0, 10, 0], rotate: [0, 20, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 10.5V6a2 2 0 00-2-2H5a2 2 0 00-2 2v4.5M21 10.5l-9 6.5-9-6.5M21 10.5V18a2 2 0 01-2 2H5a2 2 0 01-2-2v-7.5" />
-        </svg>
-      </motion.div>
-    </div>
-  </div>
-</motion.section>
+      <ContactSection  id="contact-us" />
+
     </div>
   );
 }
