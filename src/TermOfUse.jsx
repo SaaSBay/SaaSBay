@@ -1,6 +1,6 @@
 import React from "react";
-
-const TermOfUse = () => (
+export default function TermsOfUse() {
+  return (
   <div className="max-w-3xl mx-auto px-4 py-12 text-left">
     <h1 className="text-3xl font-bold mb-6 text-primary mt-10">Terms of Use for saasBay.in</h1>
     <p className="text-secondary mb-4"><strong>Effective Date:</strong> [Insert Date]</p>
@@ -77,5 +77,4 @@ const TermOfUse = () => (
     </p>
   </div>
 );
-
-export default TermOfUse;
+}

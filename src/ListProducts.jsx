@@ -106,44 +106,69 @@ const vendorLogos = [
   "https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_TV_2015.png",
   "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
 ];
+
+
 const faqs = [
   {
-    q: "Is it really free to list my SaaS?",
-    a: "Yes, listing your product on SaaSBay is completely free. We also offer optional premium placements and visibility upgrades if you're looking to scale faster.",
+    q: "Can I list my SaaS product for free?",
+    a: "Yes! SaaSBay offers a Launchpad Listing that is completely free. It’s ideal for early-stage or bootstrapped SaaS products. As part of our limited-time launch offer, the first 50 vendors will receive 1 year of Pro Access absolutely free.",
   },
   {
-    q: "Who sees my listing?",
-    a: "Your listing is seen by high-intent Indian buyers, including startup founders, SMB teams, and enterprise decision-makers actively evaluating SaaS tools.",
+    q: "How many payment plans do you offer?",
+    a: "We offer tiered listing plans designed to match your stage of growth and visibility needs. While our free plan is always available, our paid plans offer enhanced exposure, lead access, and branding features.",
   },
   {
-    q: "How do I stand out from other products?",
-    a: "You can stand out with strong visuals, clear feature breakdowns, and a compelling pitch. SaaSBay also supports reviews, highlights, and badges to boost visibility.",
+    q: "Do you offer monthly payment options?",
+    a: "No. All paid plans are available on an annual basis only, allowing for sustained exposure and consistent lead engagement throughout the year.",
   },
   {
-    q: "How soon will my listing go live?",
-    a: "Listings are typically reviewed and approved within 24–48 hours. You'll get a confirmation as soon as it's live.",
+    q: "How long does it take for my product to go live?",
+    a: "Once you submit your product, our team conducts a quick review to ensure quality and relevance. Listings typically go live within 24–48 hours after submission.",
   },
   {
-    q: "Can I edit or update my listing after it's live?",
-    a: "Absolutely. You can update product features, pricing, images, and other details anytime from your vendor dashboard.",
+    q: "How can I stand out against other listings?",
+    a: "To increase your visibility:\n- Upgrade to a premium plan for featured placement\n- Use high-quality visuals (screenshots, explainer videos, logos)\n- Earn the “SaaS Approved” badge (available in our top-tier plan)\n- Maintain an up-to-date, benefit-focused listing",
   },
   {
-    q: "How can I get more reviews on my listing?",
-    a: "Once you're live, you’ll get a unique listing link you can share with users and customers to collect verified reviews.",
+    q: "Can I upgrade my plan later?",
+    a: "Yes. You can upgrade at any time through your Vendor Dashboard. All premium features will be unlocked immediately upon upgrade.",
   },
   {
-    q: "Do you promote listings externally?",
-    a: "Yes! High-quality listings are eligible for inclusion in newsletters, category roundups, and targeted promotional campaigns.",
+    q: "Can I downgrade my plan?",
+    a: "Yes. You can downgrade your plan before your next renewal cycle. Downgrading will remove access to features exclusive to higher-tier plans, but your listing will remain active.",
   },
   {
-    q: "What kind of support do you offer vendors?",
-    a: "Our vendor success team is available via email and live chat to help with onboarding, listing optimization, and visibility strategies.",
+    q: "How can I get more views on my listing?",
+    a: "Here are a few ways to boost visibility:\n- Add engaging visuals and product demos\n- Write clear, benefit-led descriptions\n- Upgrade to a Pro plan for homepage or featured visibility\n- Be among the first — early listings get prioritized placement",
   },
   {
-    q: "Is SaaSBay only for Indian SaaS companies?",
-    a: "We’re built for Indian SaaS—but international companies targeting Indian buyers are welcome too. We localize discovery for maximum relevance.",
+    q: "Are there assured monthly leads?",
+    a: "We do not offer guaranteed lead volumes. However, Pro and Spotlight plans significantly boost your visibility to high-intent B2B buyers. Engagement depends on listing quality, clarity, and positioning.",
+  },
+  {
+    q: "Is my data secure on SaaSBay?",
+    a: "Yes. We follow best-in-class security practices to protect all vendor data, product details, and user activity. Your data is never shared or sold without explicit consent.",
+  },
+  {
+    q: "Can I list more than one product?",
+    a: "Absolutely. You can list multiple SaaS products under one vendor account. Each product gets a dedicated page, lead funnel, and media slots.",
+  },
+  {
+    q: "Will I get analytics or insights on my listing?",
+    a: "Yes. All vendors get a basic performance dashboard showing impressions and clicks. Higher-tier plans include deeper insights like traffic source, engagement patterns, and buyer actions.",
+  },
+  {
+    q: "Can I remove my listing from SaaSBay?",
+    a: "Yes. If you wish to permanently remove your listing, you can do so from your dashboard or by contacting our support team. Once removed, your data will no longer be publicly visible.",
+  },
+  {
+    q: "Do you help with onboarding or listing optimization?",
+    a: "Yes. We offer onboarding guidance, listing best practices, and optimization support for Pro users — including how to present your SaaS effectively and improve buyer engagement.",
   },
 ];
+
+
+
 
 
 export default function ListProducts() {
@@ -151,6 +176,7 @@ export default function ListProducts() {
   const [showModal, setShowModal] = useState(false);
   const [phase, setPhase] = useState(1);
   const [progress, setProgress] = useState(0);
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
   const [vendorForm, setVendorForm] = useState({
     name: "",
     designation: "",
@@ -526,52 +552,63 @@ export default function ListProducts() {
       </section> */}
 
       {/* FAQ */}
-
 <section className="w-full flex flex-col items-center py-16 px-4 md:px-0 bg-accent">
   <h2 className="text-2xl md:text-3xl font-bold text-white mb-10 text-center">
     Frequently Asked Questions
   </h2>
+
   <div className="w-full max-w-3xl space-y-4">
-   {faqs.map((faq, i) => (
-  <motion.div
-    key={faq.q}
-    className="bg-primary/90 rounded-xl shadow transition-all duration-300"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: i * 0.1, duration: 0.5 }}
-  >
-    <button
-      className="w-full flex justify-between items-center px-6 py-5 text-left text-white font-medium focus:outline-none hover:bg-primary/80 rounded-xl transition-colors"
-      onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
-    >
-      <span className="flex items-start gap-2">
-        <FaChevronDown
-          className={`mt-1 transition-transform duration-300 ${
-            openFAQ === i ? "rotate-180" : ""
-          }`}
-        />
-        <span>{faq.q}</span>
-      </span>
-      <span>
-        {openFAQ === i ? (
-          <FaChevronUp className="text-white" />
-        ) : (
-          <FaChevronDown className="text-white" />
+    {(showAllFaqs ? faqs : faqs.slice(0, 5)).map((faq, i) => (
+      <motion.div
+        key={faq.q}
+        className="bg-primary/90 rounded-xl shadow transition-all duration-300"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: i * 0.05, duration: 0.4 }}
+      >
+        <button
+          className="w-full flex justify-between items-center px-6 py-5 text-left text-white font-medium focus:outline-none hover:bg-primary/80 rounded-xl transition-colors"
+          onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
+        >
+          <span className="flex items-start gap-2">
+            <FaChevronDown
+              className={`mt-1 transition-transform duration-300 ${
+                openFAQ === i ? "rotate-180" : ""
+              }`}
+            />
+            <span>{faq.q}</span>
+          </span>
+          <span>
+            {openFAQ === i ? (
+              <FaChevronUp className="text-white" />
+            ) : (
+              <FaChevronDown className="text-white" />
+            )}
+          </span>
+        </button>
+
+        {/* Answer content */}
+        {openFAQ === i && (
+          <div className="px-10 pb-5">
+            <p className="text-black text-sm leading-relaxed">{faq.a}</p>
+          </div>
         )}
-      </span>
-    </button>
-
-    {/* Answer content */}
-    {openFAQ === i && (
-      <div className="px-10 pb-5">
-        <p className="text-black text-sm leading-relaxed">{faq.a}</p>
-      </div>
-    )}
-  </motion.div>
-))}
-
+      </motion.div>
+    ))}
   </div>
+
+  {/* Show More / Show Less Button */}
+  {faqs.length > 5 && (
+    <div className="mt-8">
+      <button
+        onClick={() => setShowAllFaqs(!showAllFaqs)}
+        className="text-white bg-primary px-6 py-2 rounded-lg shadow hover:bg-primary-light transition"
+      >
+        {showAllFaqs ? "Show Less" : "Show More"}
+      </button>
+    </div>
+  )}
 </section>
 
       {/* Final CTA */}
@@ -590,140 +627,141 @@ export default function ListProducts() {
           Register as a Vendor
         </button>
       </section>
+{/* Modal Form */}
+<AnimatePresence>
+  {showModal && (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="bg-white rounded-2xl shadow-2xl w-full max-w-xl mx-auto p-8 relative flex flex-col overflow-y-auto max-h-[90vh]"
+        initial={{ scale: 0.95, y: 40 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.95, y: 40 }}
+      >
+        <button
+          className="absolute top-4 right-4 bg-accent text-primary px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-2"
+          onClick={() => setShowModal(false)}
+          aria-label="Close"
+        >
+          <FaTimes />
+        </button>
 
-      {/* Modal Form */}
-      <AnimatePresence>
-        {showModal && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+        {/* Progress Bar */}
+        <div className="w-full mb-6">
+          <div className="flex items-center justify-start gap-x-2 mb-2">
+            <span className="text-sm font-semibold text-primary">
+              Vendor Registration Request
+            </span>
+            <span className="text-xs text-secondary">
+              {progressPercent}% complete
+            </span>
+          </div>
+          <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div
+              className="h-2 rounded-full transition-all"
+              style={{
+                width: `${progressPercent}%`,
+                background: "linear-gradient(90deg,#3b82f6,#7ec6f6)",
+              }}
+            />
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <h3 className="text-lg font-bold text-primary mb-2">
+            Vendor Registration Request Form
+          </h3>
+
+          <input
+            name="name"
+            type="text"
+            required
+            placeholder="Name *"
+            className="input"
+            value={vendorForm.name}
+            onChange={(e) => handleChange(e, "vendor")}
+          />
+          <input
+            name="designation"
+            type="text"
+            required
+            placeholder="Designation *"
+            className="input"
+            value={vendorForm.designation}
+            onChange={(e) => handleChange(e, "vendor")}
+          />
+          <input
+            name="email"
+            type="email"
+            required
+            placeholder="Email *"
+            className="input"
+            value={vendorForm.email}
+            onChange={(e) => handleChange(e, "vendor")}
+          />
+          <input
+            name="contactNumber"
+            type="tel"
+            required
+            placeholder="Contact Number *"
+            className="input"
+            value={vendorForm.contactNumber}
+            onChange={(e) => handleChange(e, "vendor")}
+          />
+          <input
+            name="companyName"
+            type="text"
+            required
+            placeholder="Company Name *"
+            className="input"
+            value={vendorForm.companyName}
+            onChange={(e) => handleChange(e, "vendor")}
+          />
+          <input
+            name="category"
+            type="text"
+            required
+            placeholder="Category *"
+            className="input"
+            value={vendorForm.category}
+            onChange={(e) => handleChange(e, "vendor")}
+          />
+
+          {/* New Dropdown Field */}
+          <select
+            name="plan"
+            required
+            className="input"
+            value={vendorForm.plan}
+            onChange={(e) => handleChange(e, "vendor")}
           >
-            <motion.div
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-xl mx-auto p-8 relative flex flex-col overflow-y-auto max-h-[90vh]" // <-- Enable vertical scrolling
-              initial={{ scale: 0.95, y: 40 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 40 }}
+            <option value="Standard">Standard</option>
+            <option value="Pro">Pro</option>
+            <option value="Premium">Premium</option>
+          </select>
+
+          <div className="text-secondary text-xs mt-2 mb-4">
+            Note: we will get back to you via email in next 48hrs
+          </div>
+
+          <div className="flex justify-end gap-3 mt-2">
+            <button
+              type="submit"
+              className="bg-primary text-accent px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-2"
+              disabled={!isVendorValid}
             >
-              <button
-                className="absolute top-4 right-4 bg-accent text-primary px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-2"
-                onClick={() => setShowModal(false)}
-                aria-label="Close"
-              >
-                <FaTimes />
-              </button>
-              {/* Progress Bar */}
-              <div className="w-full mb-6">
-                <div className="flex items-center justify-start gap-x-2 mb-2">
-                  <span className="text-sm font-semibold text-primary">
-                    Vendor Registration Request
-                  </span>
-                  <span className="text-xs text-secondary">
-                    {progressPercent}% complete
-                  </span>
-                </div>
-                <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div
-                    className={`h-2 rounded-full transition-all`}
-                    style={{
-                      width: `${progressPercent}%`,
-                      background: "linear-gradient(90deg,#3b82f6,#7ec6f6)",
-                    }}
-                  />
-                </div>
-              </div>
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                <h3 className="text-lg font-bold text-primary mb-2">
-                  Vendor Registration Request Form
-                </h3>
-                <input
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="Name *"
-                  className="input"
-                  value={vendorForm.name}
-                  onChange={(e) => handleChange(e, "vendor")}
-                />
-                <input
-                  name="designation"
-                  type="text"
-                  required
-                  placeholder="Designation *"
-                  className="input"
-                  value={vendorForm.designation}
-                  onChange={(e) => handleChange(e, "vendor")}
-                />
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Email *"
-                  className="input"
-                  value={vendorForm.email}
-                  onChange={(e) => handleChange(e, "vendor")}
-                />
-                <input
-                  name="contactNumber"
-                  type="tel"
-                  required
-                  placeholder="Contact Number *"
-                  className="input"
-                  value={vendorForm.contactNumber}
-                  onChange={(e) => handleChange(e, "vendor")}
-                />
-                <input
-                  name="companyName"
-                  type="text"
-                  required
-                  placeholder="Company Name *"
-                  className="input"
-                  value={vendorForm.companyName}
-                  onChange={(e) => handleChange(e, "vendor")}
-                />
-                <input
-                  name="category"
-                  type="text"
-                  required
-                  placeholder="Category *"
-                  className="input"
-                  value={vendorForm.category}
-                  onChange={(e) => handleChange(e, "vendor")}
-                />
-                <input
-                  name="subCategory"
-                  type="text"
-                  placeholder="Sub Category (if any)"
-                  className="input"
-                  value={vendorForm.subCategory}
-                  onChange={(e) => handleChange(e, "vendor")}
-                />
-                <input
-                  name="gstNo"
-                  type="text"
-                  placeholder="GST NO (optional)"
-                  className="input"
-                  value={vendorForm.gstNo}
-                  onChange={(e) => handleChange(e, "vendor")}
-                />
-                <div className="text-secondary text-xs mt-2 mb-4">
-                  Note: we will get back to you via email in next 48hrs
-                </div>
-                <div className="flex justify-end gap-3 mt-2">
-                  <button
-                    type="submit"
-                    className="bg-primary text-accent px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition flex items-center gap-2"
-                    disabled={!isVendorValid}
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              Submit
+            </button>
+          </div>
+        </form>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
     </div>
   );
 }

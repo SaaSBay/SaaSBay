@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaSearch, FaUserCircle, FaCalendarAlt, FaTag, FaArrowRight, FaEnvelope, FaFire } from "react-icons/fa";
+import {
+  FaSearch,
+  FaUserCircle,
+  FaCalendarAlt,
+  FaTag,
+  FaArrowRight,
+  FaEnvelope,
+  FaFire,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./Blog.css";
 import blogData from "./assets/blogData.json";
@@ -37,7 +45,7 @@ export default function Blog() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          Insights, Trends, and Guides for SaaS Buyers & Vendors
+          Insights, Trends, and Guides for <br /> SaaS Buyers & Vendors
         </motion.h1>
         <motion.p
           className="text-secondary text-lg md:text-2xl max-w-2xl mb-8"
@@ -45,7 +53,8 @@ export default function Blog() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
         >
-          Actionable advice, industry news, and expert tips to help you make smarter SaaS decisions.
+          Actionable advice, industry news, and expert tips to help you make
+          smarter SaaS decisions.
         </motion.p>
         {/* Search Bar */}
         <motion.div
@@ -100,19 +109,30 @@ export default function Blog() {
             />
           </div>
           <div className="md:w-1/2 w-full flex flex-col justify-center p-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2">{featuredArticle.title}</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2">
+              {featuredArticle.title}
+            </h2>
             <p className="text-secondary mb-4">{featuredArticle.excerpt}</p>
             <div className="flex items-center gap-3 mb-4">
-              <img src={featuredArticle.avatar} alt={featuredArticle.author} className="w-9 h-9 rounded-full" />
-              <span className="font-semibold text-sm text-primary">{featuredArticle.author}</span>
+              <img
+                src={featuredArticle.avatar}
+                alt={featuredArticle.author}
+                className="w-9 h-9 rounded-full"
+              />
+              <span className="font-semibold text-sm text-primary">
+                {featuredArticle.author}
+              </span>
               <FaCalendarAlt className="text-gray-400" />
-              <span className="text-xs text-gray-500">{featuredArticle.date}</span>
+              <span className="text-xs text-gray-500">
+                {featuredArticle.date}
+              </span>
             </div>
             <a
               href="#"
               className="inline-flex items-center bg-primary text-accent px-5 py-2 rounded-lg font-semibold shadow hover:bg-primary-light transition text-base w-max group"
             >
-              Read More <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              Read More{" "}
+              <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </motion.div>
@@ -136,7 +156,10 @@ export default function Blog() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.6 }}
-                  whileHover={{ scale: 1.03, boxShadow: "0 8px 32px rgba(126,198,246,0.15)" }}
+                  whileHover={{
+                    scale: 1.03,
+                    boxShadow: "0 8px 32px rgba(126,198,246,0.15)",
+                  }}
                 >
                   <div className="w-full h-44 overflow-hidden relative">
                     <img
@@ -151,14 +174,21 @@ export default function Blog() {
                   <div className="flex flex-col flex-1 p-5">
                     <Link
                       to={`/blog/${a.title.replace(/\s+/g, "-").toLowerCase()}`}
+                      state={{ article: a }}
                       className="font-bold text-lg text-primary mb-1 hover:underline transition"
                     >
                       {a.title}
                     </Link>
                     <p className="text-secondary text-sm mb-3">{a.excerpt}</p>
                     <div className="flex items-center gap-2 mt-auto">
-                      <img src={a.avatar} alt={a.author} className="w-7 h-7 rounded-full" />
-                      <span className="text-xs text-primary font-semibold">{a.author}</span>
+                      <img
+                        src={a.avatar}
+                        alt={a.author}
+                        className="w-7 h-7 rounded-full"
+                      />
+                      <span className="text-xs text-primary font-semibold">
+                        {a.author}
+                      </span>
                       <FaCalendarAlt className="text-gray-400" />
                       <span className="text-xs text-gray-500">{a.date}</span>
                     </div>
@@ -191,7 +221,11 @@ export default function Blog() {
               <ul className="space-y-3">
                 {trending.map((t) => (
                   <li key={t.title} className="flex items-center gap-3">
-                    <img src={t.image} alt={t.title} className="w-10 h-10 rounded-lg object-cover" />
+                    <img
+                      src={t.image}
+                      alt={t.title}
+                      className="w-10 h-10 rounded-lg object-cover"
+                    />
                     <span className="text-sm text-secondary">{t.title}</span>
                   </li>
                 ))}
@@ -228,7 +262,9 @@ export default function Blog() {
 
       {/* Footer CTA */}
       <footer className="w-full bg-gradient-to-r from-[#e3f1fa] via-[#f5fafd] to-[#d0e7f7] py-10 flex flex-col items-center">
-        <h2 className="text-xl md:text-2xl font-bold text-primary mb-3">Stay in the Loop</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-primary mb-3">
+          Stay in the Loop
+        </h2>
         <form className="flex flex-col sm:flex-row gap-3 mb-4">
           <input
             type="email"
@@ -243,8 +279,18 @@ export default function Blog() {
           </button>
         </form>
         <div className="flex gap-4 mt-2">
-          <a href="#" className="text-primary text-2xl hover:rotate-12 transition"><FaEnvelope /></a>
-          <a href="#" className="text-primary text-2xl hover:rotate-12 transition"><FaUserCircle /></a>
+          <a
+            href="#"
+            className="text-primary text-2xl hover:rotate-12 transition"
+          >
+            <FaEnvelope />
+          </a>
+          <a
+            href="#"
+            className="text-primary text-2xl hover:rotate-12 transition"
+          >
+            <FaUserCircle />
+          </a>
         </div>
       </footer>
     </div>

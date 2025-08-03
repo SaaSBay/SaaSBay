@@ -1,6 +1,7 @@
 import React from "react";
 
-const PrivacyPolicy = () => (
+export default function PrivacyPolicy() {
+  return (
   <div className="max-w-3xl mx-auto px-4 py-12 text-left">
     <h1 className="text-3xl font-bold mb-6 text-primary mt-10">Privacy Policy of SaaSBay.in</h1>
     <p className="text-secondary mb-4"><strong>Effective Date:</strong> [Insert Date]</p>
@@ -55,5 +56,4 @@ const PrivacyPolicy = () => (
     </p>
   </div>
 );
-
-export default PrivacyPolicy;
+}

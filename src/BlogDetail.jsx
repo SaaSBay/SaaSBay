@@ -1,13 +1,13 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
-import blogData from "./assets/blogData.json";
+import { useLocation, Link } from "react-router-dom";
 import { FaCalendarAlt, FaArrowLeft } from "react-icons/fa";
 
 export default function BlogDetail() {
-  const { title } = useParams();
-  const article = blogData.articles.find(
-    (a) => a.title.replace(/\s+/g, "-").toLowerCase() === title
-  );
+  const location = useLocation();
+  const article = location.state?.article;
+
+  
+
 
   if (!article) {
     return (
@@ -50,31 +50,29 @@ export default function BlogDetail() {
             {article.category}
           </span>
         </div>
-        <p className="text-secondary text-lg mb-8 text-center">{article.excerpt}</p>
-        <article className="prose prose-lg max-w-none text-gray-700 mx-auto">
-          {/* Dummy content for detail, replace with real article body */}
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nisi eu consectetur
-            consectetur, nisl nisi consectetur nisi, euismod euismod nisi euismod nisi. Etiam euismod, nisi eu
-            consectetur consectetur, nisl nisi consectetur nisi, euismod euismod nisi euismod nisi.
-          </p>
-          <p>
-            Vivamus euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, euismod euismod nisi euismod
-            nisi. Etiam euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, euismod euismod nisi
-            euismod nisi.
-          </p>
-          <blockquote className="border-l-4 border-primary pl-4 italic text-gray-500 my-6">
-            “Great SaaS tools empower teams to do their best work. Choose wisely, grow confidently.”
-          </blockquote>
-          <ul className="list-disc pl-6 mb-6">
-            <li>Easy integration with your workflow</li>
-            <li>Secure and scalable solutions</li>
-            <li>Transparent pricing and support</li>
-          </ul>
-          <p>
-            For more insights, subscribe to our newsletter or explore other articles on SaaSBay!
-          </p>
-        </article>
+        {/* Excerpt - left aligned, slightly larger */}
+        <p className="text-secondary text-lg mb-8 text-left md:text-xl font-medium">
+          {article.excerpt}
+        </p>
+        {/* Main Content */}
+        <article
+          className="
+            prose prose-lg
+            prose-headings:font-bold
+            prose-headings:text-primary
+            prose-p:text-left
+            prose-p:mb-5
+            prose:text-left
+            prose-ul:pl-6
+            prose-li:marker:text-primary
+            prose-img:rounded-lg
+            prose-img:mx-auto
+            text-gray-800
+            max-w-none
+          "
+          dangerouslySetInnerHTML={{ __html: article.content }}
+        />
+
         <div className="flex justify-center mt-10">
           <Link
             to="/blog"

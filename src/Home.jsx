@@ -11,8 +11,8 @@ import supportIcon from "./assets/support.svg";
 import codingIcon from "./assets/coding.svg";
 import networkIcon from "./assets/network.svg";
 import salesIcon from "./assets/sales.svg";
-import Dummy1 from "./assets/Dummy_1.png";
-import Dummy2 from "./assets/Dummy_2.png";
+import Dummy1 from "./assets/Banner1.png";
+import Dummy2 from "./assets/Banner_2.png";
 import Dummy3 from "./assets/Dummy_3.png";
 
 
@@ -85,7 +85,7 @@ const sectionVariants = {
   }),
 };
 
-const bannerImages = [Dummy1, Dummy2, Dummy3];
+const bannerImages = [Dummy1, Dummy2];
 
 export default function Home() {
   const [searchSpin, setSearchSpin] = useState(false);
@@ -101,7 +101,7 @@ export default function Home() {
 
   // Carousel state
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = 3;
+  const totalSlides = 2;
 
   // Auto-slide effect
   React.useEffect(() => {
@@ -182,16 +182,17 @@ export default function Home() {
           </AnimatePresence>
           {/* Left Arrow */}
           <button
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow hover:bg-white transition z-20"
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-1 shadow hover:bg-white transition z-20 w-8 h-8 flex items-center justify-center"
             onClick={goToPrev}
             aria-label="Previous Slide"
           >
             <svg
-              width="24"
-              height="24"
+              width="20"
+              height="20"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
+              className="text-gray-700"
             >
               <path
                 d="M15 19l-7-7 7-7"
@@ -202,16 +203,17 @@ export default function Home() {
           </button>
           {/* Right Arrow */}
           <button
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow hover:bg-white transition z-20"
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-1 shadow hover:bg-white transition z-20 w-8 h-8 flex items-center justify-center"
             onClick={goToNext}
             aria-label="Next Slide"
           >
             <svg
-              width="24"
-              height="24"
+              width="20"
+              height="20"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
+              className="text-gray-700"
             >
               <path
                 d="M9 5l7 7-7 7"
