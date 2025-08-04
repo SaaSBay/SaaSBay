@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import ContactUs from "./assets/ContactUs.jpg";
 
-// Keep only this Modal component
+// Modal Component
 function Modal({ message, onClose }) {
   return (
-    <div
-      className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50"
-      onClick={onClose}
-    >
+    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50" onClick={onClose}>
       <div
         className="bg-white rounded-lg p-6 max-w-sm w-full text-center shadow-lg"
-        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+        onClick={(e) => e.stopPropagation()}
       >
         <p className="text-lg font-semibold mb-4">{message}</p>
         <button
@@ -42,15 +40,29 @@ export default function ContactSection() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = { ...formData };
+
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      intent: formData.intent,
+      message: formData.message,
+      time: new Date().toLocaleString(),
+    };
+
     try {
-      console.log("Sending to API:", JSON.stringify(payload, null, 2));
-      // await fetch("/api/contact", { method: "POST", body: JSON.stringify(payload) });
+      await emailjs.send(
+        "service_gcop268", // <-- Replace this
+        "template_ndnr2cf", // <-- Replace this
+        templateParams,
+        "H5r8UftRdaS5OcGre"   // <-- Replace this
+      );
+
       setModalMessage("Message sent! We'll get back to you soon.");
       setShowModal(true);
       setFormData({ name: "", email: "", intent: "", message: "" });
-    } catch {
-      setModalMessage("Oops, something went wrong. Please try again.");
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      setModalMessage("Oops! Something went wrong. Please try again.");
       setShowModal(true);
     }
   };
@@ -62,35 +74,21 @@ export default function ContactSection() {
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, type: "spring" }}
-     
     >
       <div className="flex flex-col md:flex-row w-full bg-gradient-to-r from-blue-100 via-accent/10 to-primary/10 rounded-2xl overflow-hidden">
         {/* Form Section */}
         <div className="flex-1 flex flex-col justify-center items-center px-6 sm:px-10 py-10 bg-white">
           <div className="flex flex-col items-center mb-4">
-            <svg
-              className="w-10 h-10 text-accent mb-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M2 8l10 6 10-6"
-              />
+            <svg className="w-10 h-10 text-accent mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2 8l10 6 10-6" />
             </svg>
-            <h2 className="text-2xl md:text-3xl font-bold text-primary text-center">
-              Contact Us
-            </h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-primary text-center">Contact Us</h2>
           </div>
           <p className="text-secondary text-sm sm:text-base mb-6 text-center max-w-md">
             Have a question or want to list your SaaS? Let’s talk!
           </p>
 
           <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
-            {/* Styled Radio Buttons */}
             <div className="flex gap-4 flex-col sm:flex-row justify-center">
               {[
                 { value: "customer", label: "I’m a Customer" },
@@ -113,7 +111,6 @@ export default function ContactSection() {
                     onChange={handleChange}
                     required
                   />
-
                   {option.label}
                 </label>
               ))}
@@ -160,7 +157,7 @@ export default function ContactSection() {
           </form>
         </div>
 
-        {/* Illustration - Hidden on Mobile */}
+        {/* Illustration */}
         <div className="hidden md:flex flex-1 flex-col justify-center items-center bg-gradient-to-br from-blue-100 via-accent/10 to-primary/10 relative">
           <motion.img
             src={ContactUs}
@@ -175,9 +172,7 @@ export default function ContactSection() {
         </div>
       </div>
 
-      {showModal && (
-        <Modal message={modalMessage} onClose={() => setShowModal(false)} />
-      )}
+      {showModal && <Modal message={modalMessage} onClose={() => setShowModal(false)} />}
     </motion.section>
   );
 }

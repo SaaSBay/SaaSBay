@@ -160,70 +160,61 @@ export default function Home() {
         style={{ filter: "blur(1px)" }}
       />
 
-      {/* Banner Carousel */}
-      <div className="w-full h-[340px] md:h-[500px] flex items-center justify-center bg-gradient-to-r from-[#e3f1fa] via-[#f5fafd] to-[#d0e7f7] overflow-x-hidden relative">
-        <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-          <AnimatePresence initial={false} mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ x: 300, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -300, opacity: 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="absolute top-0 left-0 w-full h-full flex items-center justify-center"
-            >
-              <img
-                src={bannerImages[currentSlide]}
-                alt={`Banner Slide ${currentSlide + 1}`}
-                className="w-full h-full object-cover"
-                style={{ background: "rgba(255,255,255,0.1)" }}
-              />
-            </motion.div>
-          </AnimatePresence>
-          {/* Left Arrow */}
-          <button
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-1 shadow hover:bg-white transition z-20 w-8 h-8 flex items-center justify-center"
-            onClick={goToPrev}
-            aria-label="Previous Slide"
-          >
-            <svg
-              width="20"
-              height="20"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="text-gray-700"
-            >
-              <path
-                d="M15 19l-7-7 7-7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-          {/* Right Arrow */}
-          <button
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-1 shadow hover:bg-white transition z-20 w-8 h-8 flex items-center justify-center"
-            onClick={goToNext}
-            aria-label="Next Slide"
-          >
-            <svg
-              width="20"
-              height="20"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="text-gray-700"
-            >
-              <path
-                d="M9 5l7 7-7 7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+{/* Banner Carousel */}
+<div className="w-full max-h-[720px] h-[300px] sm:h-[500px] md:h-[600px] lg:h-[700px] relative overflow-hidden">
+  <AnimatePresence initial={false} mode="wait">
+    <motion.div
+      key={currentSlide}
+      initial={{ x: 300, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: -300, opacity: 0 }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
+      className="absolute inset-0 w-full h-full"
+    >
+      <img
+        src={bannerImages[currentSlide]}
+        alt={`Banner Slide ${currentSlide + 1}`}
+        className="w-full h-full object-cover object-center"
+      />
+    </motion.div>
+  </AnimatePresence>
+
+  {/* Left Arrow */}
+  <button
+    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow-md hover:bg-white transition z-20"
+    onClick={goToPrev}
+    aria-label="Previous Slide"
+  >
+    <svg
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="text-gray-700"
+    >
+      <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  </button>
+
+  {/* Right Arrow */}
+  <button
+    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow-md hover:bg-white transition z-20"
+    onClick={goToNext}
+    aria-label="Next Slide"
+  >
+    <svg
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="text-gray-700"
+    >
+      <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  </button>
+</div>
 
 
   {/*Hided the serach and popular categories section for now*/}      
