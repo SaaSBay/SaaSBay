@@ -26,7 +26,6 @@ function App() {
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/term-of-use" element={<TermOfUse />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        {/* Add more routes as needed */}
       </Routes>
       <Footer />
     </Router>

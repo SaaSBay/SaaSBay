@@ -52,8 +52,6 @@ export default function Footer() {
                 <a
                   key={item.name}
                   href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="text-secondary hover:text-primary transition-colors text-2xl"
                   aria-label={item.name}
                 >
