@@ -344,7 +344,7 @@ export default function Home() {
           high-intent buyers, build trust, and grow your brand.
         </p>
         <a
-          href="SaaSBay/list-your-products"
+          href=" /list-your-products"
           className="inline-flex items-center bg-primary text-accent px-6 py-3 rounded-xl font-semibold shadow hover:bg-primary-light transition text-base"
         >
           List With Us
