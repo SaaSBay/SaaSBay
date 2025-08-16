@@ -1,81 +1,96 @@
-// src/components/VendorGrid.jsx
 import React from "react";
 import VendorCard from "./VendorCard";
-import DummyImg from "../assets/illustration-saas.jpg"; // Example import, adjust as needed
-
-// Example vendor data (replace with real API/data)
-const vendors = [
-  {
-    id: 1,
-    name: "Acme Cloud",
-    logo: { DummyImg },
-    description: "Cloud accounting software for SMBs.",
-    categories: ["Accounting"],
-    features: ["Automated invoicing", "Expense tracking", "Multi-currency"],
-    rating: 4.7,
-    reviews: 120,
-    badges: ["Verified", "Top Seller"],
-  },
-  {
-    id: 2,
-    name: "Zen HR",
-    logo: { DummyImg },
-    description: "Human resources and payroll solution.",
-    categories: ["HR", "Payroll"],
-    features: ["Payroll processing", "Leave management", "Employee self-service"],
-    rating: 4.5,
-    reviews: 95,
-    badges: ["Verified"],
-  },
-  {
-    id: 3,
-    name: "MarketPro",
-    logo: { DummyImg },
-    description: "All-in-one marketing automation platform.",
-    categories: ["Marketing"],
-    features: ["Email campaigns", "Analytics", "CRM integration"],
-    rating: 4.2,
-    reviews: 78,
-    badges: [],
-  },
-  {
-    id: 4,
-    name: "SecureIT",
-    logo: { DummyImg },
-    description: "Cybersecurity software for enterprises.",
-    categories: ["Security"],
-    features: ["Firewall", "Threat detection", "Data encryption"],
-    rating: 4.8,
-    reviews: 200,
-    badges: ["Verified", "Editor's Choice"],
-  },
-  {
-    id: 5,
-    name: "TaskFlow",
-    logo: { DummyImg },
-    description: "Task and project management tool.",
-    categories: ["Productivity"],
-    features: ["Kanban boards", "Time tracking", "Collaboration tools"],
-    rating: 4.3,
-    reviews: 110,
-    badges: ["Top Seller"],
-  },
-];
-
+import { vendors } from "./vendors";
+import { FaSearch, FaExclamationCircle } from "react-icons/fa";
 
 const VendorGrid = ({ filters, view }) => {
-  // Filter and sort logic here (simplified for demo)
-  const filtered = vendors.filter(v =>
-    (!filters.category || v.categories.includes(filters.category)) &&
-    (!filters.search || v.name.toLowerCase().includes(filters.search.toLowerCase()))
+  // Filtering logic
+  const filtered = vendors.filter(
+    (v) =>
+      (!filters.category || v.categories.includes(filters.category)) &&
+      (!filters.search || v.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+       v.description.toLowerCase().includes(filters.search.toLowerCase()))
   );
 
+  // Sorting logic
+  const sortedVendors = [...filtered].sort((a, b) => {
+    switch (filters.sort) {
+      case "rating":
+        return (b.rating || 4.5) - (a.rating || 4.5);
+      case "name":
+        return a.name.localeCompare(b.name);
+      case "location":
+        return a.location.localeCompare(b.location);
+      default:
+        return 0;
+    }
+  });
+
+  if (sortedVendors.length === 0) {
+    return (
+      <div className="text-center py-20">
+        <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <FaSearch className="text-gray-400 text-3xl" />
+        </div>
+        <h3 className="text-2xl font-bold text-gray-900 mb-4">No vendors found</h3>
+        <p className="text-gray-600 text-lg mb-8">
+          {filters.search 
+            ? `No vendors match your search "${filters.search}"`
+            : `No vendors found in the "${filters.category}" category`
+          }
+        </p>
+        <button 
+          onClick={() => window.location.reload()}
+          className="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-8 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+        >
+          Clear Filters
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className={view === "grid" ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" : "flex flex-col gap-4"}>
-      {filtered.map(vendor => (
-        <VendorCard key={vendor.id} vendor={vendor} view={view} />
-      ))}
-      {filtered.length === 0 && <div>No vendors found.</div>}
+    <div className="vendor-grid-container">
+      {/* Results Header */}
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900">
+            {filters.category ? `${filters.category} Vendors` : 'All Vendors'}
+          </h2>
+          <span className="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold">
+            {sortedVendors.length} {sortedVendors.length === 1 ? 'vendor' : 'vendors'}
+          </span>
+        </div>
+        
+        {filters.search && (
+          <div className="flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-xl border border-blue-200">
+            <FaSearch className="text-sm" />
+            <span className="text-sm">Searching: "{filters.search}"</span>
+          </div>
+        )}
+      </div>
+
+      {/* Grid/List Layout */}
+      <div className={`vendor-grid ${
+        view === "list" 
+          ? "flex flex-col gap-6" 
+          : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+      }`}>
+        {sortedVendors.map((vendor, index) => (
+          <div key={vendor.id || index} className={`${view === "list" ? "w-full" : ""}`}>
+            <VendorCard vendor={vendor} view={view} />
+          </div>
+        ))}
+      </div>
+
+      {/* Load More Section */}
+      {sortedVendors.length > 12 && (
+        <div className="text-center mt-16">
+          <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-12 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl">
+            Load More Vendors
+          </button>
+        </div>
+      )}
     </div>
   );
 };

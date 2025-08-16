@@ -59,22 +59,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-secondary);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: var(--color-primary);
-  color: var(--color-accent);
-  cursor: pointer;
-  transition: border-color 0.25s, background-color 0.25s;
-}
-button:hover {
-  border-color: var(--color-primary-light);
-  background-color: var(--color-primary-light);
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -90,6 +75,19 @@ button:focus-visible {
   background-color: var(--color-primary-light);
   color: var(--color-accent);
 }
+
+.card {
+  overflow: hidden; /* Ensures image stays inside rounded corners */
+  border-radius: 1rem; /* Example rounded corners */
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Makes image cover full area */
+  display: block;
+}
+
 
 /* Light mode override */
 @media (prefers-color-scheme: light) {

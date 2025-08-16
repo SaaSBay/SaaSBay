@@ -1,5 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
+import { useState  } from 'react'
+import { vendors } from "./components/vendors";
 import './App.css'
 import Navbar from "./components/Navbar";
 import Home from './Home';
@@ -12,10 +13,29 @@ import ListProducts from './ListProducts';
 import Marketplace from './components/Marketplace.jsx';
 import TermOfUse from './TermOfUse.jsx';
 import PrivacyPolicy from './PrivacyPolicy.jsx';
+import ProductPage from './components/ProductPage.jsx';
+import ScrollToTop from './ScrollToTop.jsx';
+import Accessibility from './components/Accessibility.jsx';
+import ContactUs from './ContactUs.jsx';
+
+
+// Wrapper for product page
+function ProductPageWrapper() {
+  const { id } = useParams();
+  const product = vendors.find((v) => v.id.toString() === id);
+
+  if (!product) {
+    return <div className="p-6 text-red-500">Product not found</div>;
+  }
+
+  return <ProductPage product={product} />;
+}
 
 function App() {
   return (
     <Router basename="/SaaSBay">
+      <ScrollToTop />
+      {/* <ScrollToHash /> */}
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -26,6 +46,9 @@ function App() {
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/term-of-use" element={<TermOfUse />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+         <Route path="/vendors/:id" element={<ProductPageWrapper />} />
+        <Route path="/accessibility" element={<Accessibility />} />
+        <Route path="/contact-us" element={<ContactUs />} />
       </Routes>
       <Footer />
     </Router>
@@ -33,3 +56,6 @@ function App() {
 }
 
 export default App;
+
+
+
