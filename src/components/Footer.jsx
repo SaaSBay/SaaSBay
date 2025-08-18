@@ -7,8 +7,6 @@ const companyLinks = [
   { name: "Our Story", href: "/about#our-story" },
   { name: "Mission", href: "/about#mission" },
   { name: "Who We Help", href: "/about#who-we-help" },
-  { name: "Our Vision", href: "/about#vision" },
-  { name: "Blogs", href: "/blog" },
 ];
 
 const resourcesLinks = [
@@ -22,6 +20,7 @@ const supportLinks = [
   { name: "Contact Us", href: "/#contact-us" },
   { name: "FAQ", href: "/faq" },
   { name: "Help Center", href: "/help" },
+  { name : "hello@saasbay.in", href: "mailto: hello@saasbay.in" },
 ];
 
 const social = [
@@ -193,15 +192,7 @@ export default function Footer() {
               {renderLinks(supportLinks)}
             </ul>
             
-            {/* Contact Info Card */}
-            <div className="mt-8 p-4 bg-white/70 backdrop-blur-sm rounded-xl border border-pink-300/50">
-              <h4 className="font-semibold text-purple-900 mb-2 flex items-center gap-2">
-                <i className="fas fa-phone text-pink-600"></i>
-                Quick Contact
-              </h4>
-              <p className="text-sm text-purple-700 mb-1">support@saasbay.com</p>
-              <p className="text-sm text-purple-700">+1 (555) 123-4567</p>
-            </div>
+
           </div>
         </div>
 
@@ -214,7 +205,7 @@ export default function Footer() {
     </div>
     <div className="flex items-center gap-2 text-sm text-purple-600">
       <i className="fas fa-leaf text-blue-600"></i>
-      <span>Supporting Local Innovation</span>
+      <span>Supporting Indian Innovation</span>
     </div>
     <div className="flex items-center gap-2 text-sm text-purple-600">
       <i className="fas fa-lightbulb text-yellow-500"></i>
