@@ -64,7 +64,7 @@ const whatWeDoData = [
     icon: <FaBuilding />,
     color: "from-blue-500 to-cyan-500",
     features: [
-      "Explore 20+ software categories (CRM, HRMS, Accounting, Marketing, Analytics, Compliance)",
+      "Explore 20+ software categories",
       "Curated listings and side-by-side comparisons",
       "Direct access to trusted SaaS providers",
       "Clear evaluation without endless research",
@@ -384,7 +384,7 @@ const About = () => {
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed mb-6">
                   There was no single place where Indian businesses could
-                  explore their options, evaluate features clearly, and connect
+                  explore their options, evaluate features clearly, and engage
                   with the right vendors, especially across multiple SaaS
                   categories. Most discovery processes felt like guesswork, and
                   great products often got lost in the noise.

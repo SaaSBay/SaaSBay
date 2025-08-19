@@ -34,13 +34,13 @@ const processSteps = [
   {
     icon: <FaUserPlus className="text-4xl mb-3" />,
     title: "Register as a Vendor",
-    desc: "Get started in seconds—create your profile and introduce your brand to a community eager for innovation.",
+    desc: "Get started in seconds create your profile and introduce your brand to a community eager for innovation.",
     color: "from-blue-500 to-cyan-500",
   },
   {
     icon: <FaClipboardList className="text-4xl mb-3" />,
     title: "Select Your Annual Plan",
-    desc: "Choose the tier that powers your growth—unlock features designed for where you want to be next.",
+    desc: "Choose the tier that powers your growth unlock features designed for where you want to be next.",
     color: "from-purple-500 to-pink-500",
   },
   {
@@ -52,13 +52,13 @@ const processSteps = [
   {
     icon: <FaCheckCircle className="text-4xl mb-3" />,
     title: "Review & Submit",
-    desc: "Give your listing the final polish, then send it off—our team will have you live within 48 hours.",
+    desc: "Give your listing the final polish, then send it off our team will have you live within 48 hours.",
     color: "from-orange-500 to-red-500",
   },
   {
     icon: <FaChartLine className="text-4xl mb-3" />,
     title: "Receive Leads & Grow",
-    desc: "Sit back and watch qualified inquiries flow in—turn curiosity into conversations and scale your pipeline.",
+    desc: "Sit back and watch qualified inquiries flow in turn curiosity into conversations and scale your pipeline.",
     color: "from-indigo-500 to-purple-500",
   },
 ];

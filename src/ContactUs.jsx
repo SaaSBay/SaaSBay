@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { FaEnvelope, FaUser, FaComments, FaPaperPlane, FaTimes } from "react-icons/fa";
-import ContactUs from "./assets/ContactUs.jpg";
+import ContactUs from "./assets/ContactUs.png";
 
 // Modal Component
 function Modal({ message, onClose }) {
