@@ -24,7 +24,7 @@ const navLinks = [
     icon: <FaRocket />,
     highlight: true,
   },
-  { name: "Marketplace", href: "/marketplace", icon: <FaStore /> },
+  { name: "SaasHub", href: "/marketplace", icon: <FaStore /> },
   { name: "Contact Us", href: "/contact-us", icon: <FaEnvelope /> },
 ];
 
@@ -134,7 +134,7 @@ export default function Navbar() {
                       {link.highlight && !isActive && (
                         <>
                           <FaStar className="text-yellow-400 text-xs animate-pulse" />
-                          <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                         
                         </>
                       )}
 

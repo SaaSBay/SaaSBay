@@ -308,7 +308,7 @@ export default function ListProducts() {
               <div className="text-sm text-gray-600">Go Live</div>
             </div>
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center shadow-lg border border-white/50">
-              <div className="text-2xl font-bold text-green-600">95%</div>
+              <div className="text-2xl font-bold text-green-600">Higher</div>
               <div className="text-sm text-gray-600">Success Rate</div>
             </div>
           </div>
@@ -425,7 +425,7 @@ export default function ListProducts() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Pro</h3>
                 <p className="text-gray-500 mb-4">Growth Catalyst</p>
                 <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                  ₹1,999<span className="text-lg font-normal text-gray-500">/mo</span>
+                  ₹23,999<span className="text-lg font-normal text-gray-500">/year</span>
                 </div>
               </div>
 
@@ -470,7 +470,7 @@ export default function ListProducts() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Premium</h3>
                 <p className="text-gray-500 mb-4">Spotlight Nexus</p>
                 <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-                  ₹4,999<span className="text-lg font-normal text-gray-500">/mo</span>
+                  ₹29,999<span className="text-lg font-normal text-gray-500">/year</span>
                 </div>
               </div>
 
@@ -692,7 +692,7 @@ export default function ListProducts() {
               onClick={() => setShowModal(true)}
               className="bg-white text-blue-600 px-10 py-4 rounded-2xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 flex items-center gap-3 text-lg"
             >
-              <FaTrophy className="text-yellow-500" />
+              <FaChartLine className="text-yellow-500" />
               Register as a Vendor
             </button>
             <div className="text-white/80 text-sm">

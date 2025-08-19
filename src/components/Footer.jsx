@@ -5,7 +5,7 @@ import Logo from "../assets/SaasLogo.png";
 const companyLinks = [
   { name: "About", href: "/about" },
   { name: "Our Story", href: "/about#our-story" },
-  { name: "Mission", href: "/about#mission" },
+  { name: "Our Vision", href: "/about#our-vision" },
   { name: "Who We Help", href: "/about#who-we-help" },
 ];
 
@@ -26,8 +26,7 @@ const supportLinks = [
 const social = [
   { name: "Twitter", href: "https://twitter.com", icon: "fa-brands fa-twitter" },
   { name: "LinkedIn", href: "https://www.linkedin.com/company/saasbay/", icon: "fa-brands fa-linkedin" },
-  { name: "GitHub", href: "https://github.com", icon: "fa-brands fa-github" },
-  { name: "Discord", href: "https://discord.com", icon: "fa-brands fa-discord" },
+
 ];
 
 export default function Footer() {

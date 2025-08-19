@@ -44,7 +44,7 @@ const Marketplace = () => {
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900">
               SaaS{" "}
               <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-blue-500 bg-clip-text text-transparent">
-                Marketplace
+                Hub
               </span>
             </h1>
           </div>

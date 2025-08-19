@@ -349,7 +349,7 @@ export default function Home() {
         </motion.section> */}
 
         {/* Categories Section */}
-        <motion.section
+        {/* <motion.section
           ref={categoriesRef}
           className="mb-24"
           initial="hidden"
@@ -394,12 +394,12 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
-        </motion.section>
+        </motion.section> */}
 
         {/* Features Section */}
         <motion.section
           ref={featuresRef}
-          className="mb-24"
+          className="mb-24 pt-16"
           initial="hidden"
           animate={featuresInView ? "visible" : "hidden"}
         >
@@ -607,17 +607,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Action buttons - responsive */}
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center max-w-md sm:max-w-none mx-auto">
-                <button className="w-full sm:w-auto bg-white text-blue-600 font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg text-base sm:text-lg flex items-center justify-center gap-2">
-                  <FaPlay className="text-sm sm:text-base" />
-                  Watch Demo
-                </button>
-                <button className="w-full sm:w-auto border-2 border-white text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl hover:bg-white hover:text-blue-600 transition-all duration-300 text-base sm:text-lg flex items-center justify-center gap-2">
-                  <FaGlobe className="text-sm sm:text-base" />
-                  Learn More
-                </button>
-              </div>
+              
             </div>
           </div>
         </motion.section>
