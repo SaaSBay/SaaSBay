@@ -40,19 +40,19 @@ const stats = [
 const missionPoints = [
   {
     icon: <FaSearch />,
-    title: "Discover",
+    title: "Explore",
     description:
       "Transform how Indian businesses discover and adopt software by making the journey smarter, simpler, and more transparent",
   },
   {
     icon: <FaConnectdevelop />,
-    title: "Connect",
+    title: "Evaluate",
     description:
       "Create a dedicated platform for SaaS providers to showcase their products and connect with the right audience at the right moment",
   },
   {
     icon: <FaAward />,
-    title: "Empower",
+    title: "Engage",
     description:
       "Enable every decision maker with the clarity, confidence, and tools they need to choose the right software solutions",
   },
@@ -448,7 +448,7 @@ const About = () => {
               </p>
               <p className="text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto">
                 By bridging both sides of the ecosystem, SaasBay is building
-                more than just a marketplace — we're enabling better decisions,
+                more than just a marketplace  we're enabling better decisions,
                 faster connections, and a future where software adoption fuels
                 business growth at every level.
               </p>
@@ -467,7 +467,7 @@ const About = () => {
             </div>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
               We simplify software discovery by bringing everything businesses
-              need into one unified platform — curated listings, side-by-side
+              need into one unified platform  curated listings, side-by-side
               comparisons, and direct access to trusted SaaS providers.
             </p>
           </div>
@@ -549,7 +549,7 @@ const About = () => {
                 For SaaS providers, we offer more than visibility, we provide a
                 platform to tell your story, highlight your strengths, and reach
                 the right audience with purpose. At our core, we're building
-                trust — one discovery, one comparison, and one connection at a
+                trust  one discovery, one comparison, and one connection at a
                 time.
               </p>
             </div>
@@ -566,7 +566,7 @@ const About = () => {
               <h2 className="text-4xl font-bold text-gray-900">Who We Help</h2>
             </div>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              SaasBay is built for both sides of the software ecosystem — the
+              SaasBay is built for both sides of the software ecosystem  the
               businesses searching for the right tools, and the SaaS providers
               building them.
             </p>
@@ -630,8 +630,8 @@ const About = () => {
                 Shaping the Future of Software Discovery
               </h3>
               <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                We imagine a future where every business — regardless of size or
-                stage — can confidently find the right software without
+                We imagine a future where every business  regardless of size or
+                stage  can confidently find the right software without
                 guesswork. A future where software adoption is driven by
                 clarity, not clutter. Where SaaS providers of all scales have a
                 fair and focused platform to grow, connect, and be discovered.

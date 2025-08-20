@@ -154,15 +154,14 @@ export default function Blog() {
             </p>
 
             {/* Enhanced Search Section */}
-            <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100 max-w-4xl mx-auto mb-8">
-              <div className="flex items-center bg-gray-50 rounded-2xl border-2 border-gray-200 focus-within:border-blue-500 focus-within:bg-white transition-all duration-300 p-2">
-                <FaSearch className="text-gray-400 ml-4 mr-3" />
+            <div className="bg-white rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border border-gray-100 max-w-full sm:max-w-3xl md:max-w-4xl mx-auto mb-6 sm:mb-8">
+              <div className="flex items-center bg-gray-50 rounded-2xl border-2 border-gray-200 focus-within:border-blue-500 focus-within:bg-white transition-all duration-300 px-2 py-1">
                 <input
                   type="text"
                   placeholder="Search for CRM insights, HR trends, marketing guides..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="flex-grow px-4 py-4 bg-transparent outline-none text-lg"
+                  className="flex-grow w-full px-4 py-5 bg-transparent outline-none text-base sm:text-lg"
                   onKeyPress={(e) => {
                     if (e.key === "Enter") {
                       setSearchSpin(true);
@@ -170,12 +169,13 @@ export default function Blog() {
                     }
                   }}
                 />
+
                 <motion.button
                   onClick={() => {
                     setSearchSpin(true);
                     setTimeout(() => setSearchSpin(false), 700);
                   }}
-                  className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl transition-colors mr-2"
+                  className="w-11 h-11 sm:w-12 sm:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-colors flex items-center justify-center mr-2"
                   animate={searchSpin ? { rotate: 360 } : { rotate: 0 }}
                   transition={{ duration: 0.7 }}
                 >
@@ -290,19 +290,18 @@ export default function Blog() {
                 </div>
 
                 <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700  px-8 py-4 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center gap-3 w-fit group">
-                <Link
-                  to={`/blog/${featuredArticle.title
-                    .replace(/\s+/g, "-")
-                    .toLowerCase()}`}
-                  state={{ article: featuredArticle }}
-                  className="flex items-center gap-2 "
-                >
-                  <span className="text-white">Read Full Article</span>
-                  
-                  <FaArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
-                </Link>
-                </button>
+                  <Link
+                    to={`/blog/${featuredArticle.title
+                      .replace(/\s+/g, "-")
+                      .toLowerCase()}`}
+                    state={{ article: featuredArticle }}
+                    className="flex items-center gap-2 "
+                  >
+                    <span className="text-white">Read Full Article</span>
 
+                    <FaArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
+                  </Link>
+                </button>
               </div>
             </div>
           </div>

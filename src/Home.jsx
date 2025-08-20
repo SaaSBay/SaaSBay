@@ -125,7 +125,6 @@ const testimonials = [
     avatar: "https://randomuser.me/api/portraits/men/44.jpg",
   },
 ];
-
 const steps = [
   {
     step: "01",
@@ -134,20 +133,21 @@ const steps = [
   },
   {
     step: "02",
-    title: "Compare",
-    description: "Evaluate features side-by-side",
+    title: "Evaluate",
+    description: "Assess features and compare solutions",
   },
   {
     step: "03",
-    title: "Connect",
-    description: "Reach out to providers directly",
+    title: "Engage",
+    description: "Connect with providers and ask questions",
   },
   {
     step: "04",
-    title: "Decide",
-    description: "Make confident software choices",
+    title: "Get Started",
+    description: "Choose the right software and take action",
   },
 ];
+
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
