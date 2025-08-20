@@ -393,10 +393,10 @@ export default function ListProducts() {
                   <span className="text-gray-400">No video uploads</span>
                 </li>
               </ul>
+<button className="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+  Go Live
+</button>
 
-              <button className="w-full bg-gray-200 text-gray-500 py-4 rounded-2xl font-bold cursor-not-allowed transition-all duration-300">
-                Coming Soon
-              </button>
             </div>
           </motion.div>
 
@@ -436,18 +436,20 @@ export default function ListProducts() {
                   "1 video per product",
                   "Early lead access (48 hrs before)",
                   "49-hr Homepage banner",
-                  "SAAS Approved badge"
+                  "SAAS Approved badge",
+                  "100% Discount for Year 1"
                 ].map((feature, idx) => (
                   <li key={idx} className="flex items-center gap-3">
                     <FaCheckCircle className="text-green-500 flex-shrink-0" />
                     <span className="text-gray-700">{feature}</span>
                   </li>
+                  
                 ))}
               </ul>
+<button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+  Go Live – Free for First Year
+</button>
 
-              <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                Join Waitlist
-              </button>
             </div>
           </motion.div>
 
@@ -489,10 +491,10 @@ export default function ListProducts() {
                   </li>
                 ))}
               </ul>
+<button className="w-full bg-gray-200 text-gray-500 py-4 rounded-2xl font-bold cursor-not-allowed transition-all duration-300">
+  Coming Soon
+</button>
 
-              <button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                Join Waitlist
-              </button>
             </div>
           </motion.div>
         </div>
@@ -675,7 +677,7 @@ export default function ListProducts() {
 
         <div className="relative z-10 text-center">
           <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-full text-sm font-semibold mb-8 shadow-lg">
-            <FaTrophy className="text-yellow-300" />
+            <FaChartLine className="text-yellow-300" />
             <span>Start Your Journey</span>
           </div>
           

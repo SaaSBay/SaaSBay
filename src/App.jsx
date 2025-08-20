@@ -17,7 +17,7 @@ import ProductPage from './components/ProductPage.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
 import Accessibility from './components/Accessibility.jsx';
 import ContactUs from './ContactUs.jsx';
-
+import ChatBot from './ChatBot.jsx';
 
 // Wrapper for product page
 function ProductPageWrapper() {
@@ -50,6 +50,7 @@ function App() {
         <Route path="/accessibility" element={<Accessibility />} />
         <Route path="/contact-us" element={<ContactUs />} />
       </Routes>
+      <ChatBot />
       <Footer />
     </Router>
   );
