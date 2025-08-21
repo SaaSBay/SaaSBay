@@ -30,7 +30,7 @@ import {
   FaGlobe,
   FaExclamationTriangle 
 } from "react-icons/fa";
-import {saveVendorApplication} from './services/backend.js';
+import {saveVendorApplication} from '../services/backend.js';
 
 
 const processSteps = [
