@@ -28,7 +28,10 @@ import {
   FaEye,
   FaHeart,
   FaGlobe,
+  aExclamationTriangle 
 } from "react-icons/fa";
+import {saveVendorApplication} from './services/backend.js';
+
 
 const processSteps = [
   {
@@ -188,6 +191,8 @@ const faqs = [
   },
 ];
 
+
+
 export default function ListProducts() {
   const [openFAQ, setOpenFAQ] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -216,6 +221,7 @@ export default function ListProducts() {
     integrationOptions: "",
     trialAvailable: false,
   });
+  const [formStatus, setFormStatus] = useState("idle"); // idle | success | error
 
   // Calculate progress
   const totalFields = phase === 1 ? 8 : 8; // Updated to 8 for vendor fields
@@ -244,19 +250,24 @@ export default function ListProducts() {
   const isVendorValid = vendorMandatory.every((f) => vendorForm[f]);
   const isProductValid = productMandatory.every((f) => productForm[f]);
 
-  // Submit handler (dummy)
-  const handleSubmit = (e) => {
+  // Submit handler (calls saveVendorApplication)
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowModal(false);
-    setPhase(1);
-    setVendorForm({
-      name: "", designation: "", email: "", contactNumber: "",
-      companyName: "", category: "", subCategory: "", gstNo: "", plan: "Standard",
-    });
-    setProductForm({
-      name: "", description: "", features: "", pricingBasic: "",
-      pricingPro: "", images: "", categories: "", integrationOptions: "", trialAvailable: false,
-    });
+    setFormStatus("idle");
+    const result = await saveVendorApplication(vendorForm);
+    if (result.success) {
+      setFormStatus("success");
+      setVendorForm({
+        name: "", designation: "", email: "", contactNumber: "",
+        companyName: "", category: "", subCategory: "", gstNo: "", plan: "Standard",
+      });
+      setProductForm({
+        name: "", description: "", features: "", pricingBasic: "",
+        pricingPro: "", images: "", categories: "", integrationOptions: "", trialAvailable: false,
+      });
+    } else {
+      setFormStatus("error");
+    }
   };
 
   return (
@@ -393,7 +404,7 @@ export default function ListProducts() {
                   <span className="text-gray-400">No video uploads</span>
                 </li>
               </ul>
-<button className="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+<button  onClick={() => setShowModal(true)} className="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
   Go Live
 </button>
 
@@ -446,7 +457,7 @@ export default function ListProducts() {
                   
                 ))}
               </ul>
-<button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+<button    onClick={() => setShowModal(true)} className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
   Go Live – Free for First Year
 </button>
 
@@ -722,161 +733,220 @@ export default function ListProducts() {
             >
               <button
                 className="absolute top-6 right-6 w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
-                onClick={() => setShowModal(false)}
+                onClick={() => {
+                  setShowModal(false);
+                  setFormStatus("idle");
+                }}
                 aria-label="Close"
               >
                 <FaTimes className="text-gray-600" />
               </button>
 
-              {/* Enhanced Header */}
-              <div className="text-center mb-8">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center text-white text-3xl shadow-lg mx-auto mb-4">
-                  <FaRocket />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  Join SaaSBay as a Vendor
-                </h3>
-                <p className="text-gray-600">
-                  Start your journey to connect with qualified buyers
-                </p>
-              </div>
-
-              {/* Enhanced Progress Bar */}
-              <div className="mb-8">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-semibold text-gray-700">
-                    Registration Progress
-                  </span>
-                  <span className="text-sm font-semibold text-blue-600">
-                    {progressPercent}% Complete
-                  </span>
-                </div>
-                <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progressPercent}%` }}
-                    transition={{ duration: 0.5 }}
-                  />
-                </div>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="relative">
-                    <input
-                      name="name"
-                      type="text"
-                      required
-                      placeholder="Full Name *"
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-                      value={vendorForm.name}
-                      onChange={(e) => handleChange(e, "vendor")}
-                    />
-                  </div>
-                  <div className="relative">
-                    <input
-                      name="designation"
-                      type="text"
-                      required
-                      placeholder="Designation *"
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-                      value={vendorForm.designation}
-                      onChange={(e) => handleChange(e, "vendor")}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <input
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="Email Address *"
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-                    value={vendorForm.email}
-                    onChange={(e) => handleChange(e, "vendor")}
-                  />
-                  <input
-                    name="contactNumber"
-                    type="tel"
-                    required
-                    placeholder="Contact Number *"
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-                    value={vendorForm.contactNumber}
-                    onChange={(e) => handleChange(e, "vendor")}
-                  />
-                </div>
-
-                <input
-                  name="companyName"
-                  type="text"
-                  required
-                  placeholder="Company Name *"
-                  className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-                  value={vendorForm.companyName}
-                  onChange={(e) => handleChange(e, "vendor")}
-                />
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <input
-                    name="category"
-                    type="text"
-                    required
-                    placeholder="Product Category *"
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-                    value={vendorForm.category}
-                    onChange={(e) => handleChange(e, "vendor")}
-                  />
-                  <select
-                    name="plan"
-                    required
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-                    value={vendorForm.plan}
-                    onChange={(e) => handleChange(e, "vendor")}
+              {/* Success Message */}
+              {formStatus === "success" && (
+                <div className="flex flex-col items-center justify-center py-12">
+                  <FaCheckCircle className="text-green-500 text-6xl mb-6 animate-bounce" />
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    Application Submitted!
+                  </h3>
+                  <p className="text-gray-700 text-lg mb-6 text-center max-w-md">
+                    Thank you for registering as a vendor on SaaSBay.<br />
+                    Our team will review your application and get back to you within <b>48 hours</b>.<br />
+                    We’re excited to have you onboard!
+                  </p>
+                  <button
+                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                    onClick={() => {
+                      setShowModal(false);
+                      setFormStatus("idle");
+                    }}
                   >
-                    <option value="Standard">Basic Plan</option>
-                    <option value="Pro">Pro Plan</option>
-                    <option value="Premium">Premium Plan</option>
-                  </select>
+                    Close
+                  </button>
                 </div>
+              )}
 
-                <input
-                  name="gstNo"
-                  type="text"
-                  placeholder="GST Number (Optional)"
-                  className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-                  value={vendorForm.gstNo}
-                  onChange={(e) => handleChange(e, "vendor")}
-                />
+              {/* Error Message */}
+              {formStatus === "error" && (
+                <div className="flex flex-col items-center justify-center py-12">
+                  <FaExclamationTriangle className="text-red-500 text-6xl mb-6 animate-pulse" />
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    Submission Failed
+                  </h3>
+                  <p className="text-gray-700 text-lg mb-6 text-center max-w-md">
+                    Oops! Something went wrong while submitting your application.<br />
+                    Please try again. If the issue persists, contact us at{" "}
+                    <a
+                      href="mailto:support@saasbay.in"
+                      className="text-blue-600 underline"
+                    >
+                      support@saasbay.in
+                    </a>
+                    .
+                  </p>
+                  <button
+                    className="bg-gray-200 text-gray-800 px-8 py-3 rounded-xl font-semibold hover:bg-gray-300 transition-all duration-300"
+                    onClick={() => setFormStatus("idle")}
+                  >
+                    Try Again
+                  </button>
+                </div>
+              )}
 
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-                  <div className="flex items-start gap-3">
-                    <FaEye className="text-blue-500 mt-1 flex-shrink-0" />
-                    <div className="text-sm text-blue-800">
-                      <p className="font-semibold mb-1">What happens next?</p>
-                      <p>We'll review your application and get back to you via email within 48 hours with next steps and onboarding details.</p>
+              {/* Form (only show if not success/error) */}
+              {formStatus === "idle" && (
+                <>
+                  {/* Enhanced Header */}
+                  <div className="text-center mb-8">
+                    <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center text-white text-3xl shadow-lg mx-auto mb-4">
+                      <FaRocket />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                      Join SaaSBay as a Vendor
+                    </h3>
+                    <p className="text-gray-600">
+                      Start your journey to connect with qualified buyers
+                    </p>
+                  </div>
+
+                  {/* Enhanced Progress Bar */}
+                  <div className="mb-8">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-semibold text-gray-700">
+                        Registration Progress
+                      </span>
+                      <span className="text-sm font-semibold text-blue-600">
+                        {progressPercent}% Complete
+                      </span>
+                    </div>
+                    <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                      <motion.div
+                        className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${progressPercent}%` }}
+                        transition={{ duration: 0.5 }}
+                      />
                     </div>
                   </div>
-                </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <button
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                    className="flex-1 bg-gray-200 text-gray-800 py-3 px-6 rounded-xl font-semibold hover:bg-gray-300 transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                    disabled={!isVendorValid}
-                  >
-                    Submit Application
-                  </button>
-                </div>
-              </form>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="relative">
+                        <input
+                          name="name"
+                          type="text"
+                          required
+                          placeholder="Full Name *"
+                          className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                          value={vendorForm.name}
+                          onChange={(e) => handleChange(e, "vendor")}
+                        />
+                      </div>
+                      <div className="relative">
+                        <input
+                          name="designation"
+                          type="text"
+                          required
+                          placeholder="Designation *"
+                          className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                          value={vendorForm.designation}
+                          onChange={(e) => handleChange(e, "vendor")}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <input
+                        name="email"
+                        type="email"
+                        required
+                        placeholder="Email Address *"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                        value={vendorForm.email}
+                        onChange={(e) => handleChange(e, "vendor")}
+                      />
+                      <input
+                        name="contactNumber"
+                        type="tel"
+                        required
+                        placeholder="Contact Number *"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                        value={vendorForm.contactNumber}
+                        onChange={(e) => handleChange(e, "vendor")}
+                      />
+                    </div>
+
+                    <input
+                      name="companyName"
+                      type="text"
+                      required
+                      placeholder="Company Name *"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                      value={vendorForm.companyName}
+                      onChange={(e) => handleChange(e, "vendor")}
+                    />
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <input
+                        name="category"
+                        type="text"
+                        required
+                        placeholder="Product Category *"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                        value={vendorForm.category}
+                        onChange={(e) => handleChange(e, "vendor")}
+                      />
+                      <select
+                        name="plan"
+                        required
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                        value={vendorForm.plan}
+                        onChange={(e) => handleChange(e, "vendor")}
+                      >
+                        <option value="Standard">Basic Plan</option>
+                        <option value="Pro">Pro Plan</option>
+                        <option value="Premium">Premium Plan</option>
+                      </select>
+                    </div>
+
+                    <input
+                      name="gstNo"
+                      type="text"
+                      placeholder="GST Number (Optional)"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                      value={vendorForm.gstNo}
+                      onChange={(e) => handleChange(e, "vendor")}
+                    />
+
+                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                      <div className="flex items-start gap-3">
+                        <FaEye className="text-blue-500 mt-1 flex-shrink-0" />
+                        <div className="text-sm text-blue-800">
+                          <p className="font-semibold mb-1">What happens next?</p>
+                          <p>We'll review your application and get back to you via email within 48 hours with next steps and onboarding details.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                      <button
+                        type="button"
+                        onClick={() => setShowModal(false)}
+                        className="flex-1 bg-gray-200 text-gray-800 py-3 px-6 rounded-xl font-semibold hover:bg-gray-300 transition-colors"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                        disabled={!isVendorValid}
+                      >
+                        Submit Application
+                      </button>
+                    </div>
+                  </form>
+                </>
+              )}
             </motion.div>
           </motion.div>
         )}
