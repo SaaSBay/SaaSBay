@@ -28,7 +28,7 @@ import {
   FaEye,
   FaHeart,
   FaGlobe,
-  aExclamationTriangle 
+  FaExclamationTriangle 
 } from "react-icons/fa";
 import {saveVendorApplication} from './services/backend.js';
 
