@@ -33,7 +33,7 @@ function ProductPageWrapper() {
 
 function App() {
   return (
-    <Router basename="/SaaSBay">
+    <Router>
       <ScrollToTop />
       {/* <ScrollToHash /> */}
       <Navbar />
