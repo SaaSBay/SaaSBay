@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
+import ReactGA from "react-ga4";
 import { useState  } from 'react'
 import { vendors } from "./components/vendors";
 import './App.css'
@@ -18,6 +19,7 @@ import ScrollToTop from './ScrollToTop.jsx';
 import Accessibility from './components/Accessibility.jsx';
 import ContactUs from './ContactUs.jsx';
 import ChatBot from './ChatBot.jsx';
+
 
 // Wrapper for product page
 function ProductPageWrapper() {
