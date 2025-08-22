@@ -45,3 +45,20 @@ export async function saveVendorApplication(data) {
     return { success: false, error };
   }
 }
+
+// Save contact form data to Firestore
+export async function saveContactMessage(data) {
+  try {
+    const docRef = await addDoc(collection(db, "Contacts"), {
+      name: data.name,
+      email: data.email,
+      intent: data.intent,
+      message: data.message,
+      createdAt: Timestamp.now(),
+      status: "new", // You can use this for tracking
+    });
+    return { success: true, id: docRef.id };
+  } catch (error) {
+    return { success: false, error };
+  }
+}

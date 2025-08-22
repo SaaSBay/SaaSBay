@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { FaEnvelope, FaUser, FaComments, FaPaperPlane, FaTimes } from "react-icons/fa";
 import ContactUs from "./assets/ContactUs.png";
+import { saveContactMessage } from "../services/backend"; // Adjust path if needed
 
 // Modal Component
 function Modal({ message, onClose }) {
@@ -58,30 +59,22 @@ export default function ContactSection() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    const templateParams = {
-      name: formData.name,
-      email: formData.email,
-      intent: formData.intent,
-      message: formData.message,
-      time: new Date().toLocaleString(),
-    };
 
     try {
-      await emailjs.send(
-        "service_gcop268", 
-        "template_ndnr2cf",
-        templateParams,
-        "H5r8UftRdaS5OcGre" 
-      );
-      setModalMessage("Thank you for reaching out! We'll get back to you within 24 hours.");
-      setShowModal(true);
-      setFormData({ name: "", email: "", intent: "", message: "" });
+      const result = await saveContactMessage(formData);
+
+      if (result.success) {
+        setModalMessage("Thank you for reaching out! We'll get back to you within 24 hours.");
+        setFormData({ name: "", email: "", intent: "", message: "" });
+      } else {
+        throw result.error;
+      }
     } catch (error) {
-      console.error("EmailJS Error:", error);
-      setModalMessage("Oops! Something went wrong. Please try again or email us directly.");
-      setShowModal(true);
+      setModalMessage(
+        "Oops! Something went wrong while submitting your message. Please try again later or email us directly at saasbay@email.in."
+      );
     } finally {
+      setShowModal(true);
       setIsSubmitting(false);
     }
   };
