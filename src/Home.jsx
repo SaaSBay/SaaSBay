@@ -191,116 +191,16 @@ export default function Home() {
         />
       </div>
 
-      {/* Hero Banner Carousel */}
-      <section className="relative w-full h-[300px] sm:h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden">
-        <AnimatePresence initial={false} mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ x: 300, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -300, opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="absolute inset-0 w-full h-full"
-          >
-            <img
-              src={bannerImages[currentSlide]}
-              alt={`Banner Slide ${currentSlide + 1}`}
-              className="w-full h-full object-cover object-center"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-black/40"></div>
-          </motion.div>
-        </AnimatePresence>
 
-        {/* Hero Content Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center z-10">
-          {/* <div className="text-center text-white px-6 max-w-4xl">
-            <motion.h1 
-              className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              India's First Curated
-              <br />
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                SaaS Marketplace
-              </span>
-            </motion.h1>
-            <motion.p 
-              className="text-xl md:text-2xl mb-8 opacity-90 drop-shadow-md"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Discover, Compare & Connect with the right software solutions
-            </motion.p>
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl">
-                Explore Products
-              </button>
-              <button className="bg-white/20 backdrop-blur-sm border-2 border-white text-white font-bold py-4 px-8 rounded-2xl hover:bg-white hover:text-gray-900 transition-all duration-300">
-                List Your SaaS
-              </button>
-            </motion.div>
-          </div> */}
-        </div>
+{/* New saasBay Homepage Banner */}
+<section className="w-full overflow-hidden bg-[#fff9e8]">
+  <img
+    src={`${import.meta.env.BASE_URL}saasBay%20SaaS%20Marketplace%20Hero.png`}
+    alt="Discover the Best SaaS Solutions - saasBay"
+    className="block w-full h-auto"
+  />
+</section>
 
-        {/* Navigation Arrows */}
-        <button
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-3 shadow-lg hover:bg-white transition z-20"
-          onClick={goToPrev}
-        >
-          <svg
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path
-              d="M15 19l-7-7 7-7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-        <button
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-3 shadow-lg hover:bg-white transition z-20"
-          onClick={goToNext}
-        >
-          <svg
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path
-              d="M9 5l7 7-7 7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-
-        {/* Slide Indicators */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-          {bannerImages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentSlide === index ? "bg-white scale-125" : "bg-white/50"
-              }`}
-            />
-          ))}
-        </div>
-      </section>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Enhanced Search Section */}
